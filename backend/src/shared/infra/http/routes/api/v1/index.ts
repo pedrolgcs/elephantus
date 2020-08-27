@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+// routes
 import rolesRouter from '@modules/users/infra/http/routes/roles.routes';
 import usersRouter from '@modules/users/infra/http/routes/users.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';

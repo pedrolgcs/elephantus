@@ -31,6 +31,9 @@ export function auth(
 
     const { sub, role } = decoded as ITokenPayload;
 
+    /* review later */
+    // request.decoded = decoded as ITokenPayload;
+
     request.user = {
       id: sub,
       role,

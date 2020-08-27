@@ -21,6 +21,7 @@ describe('ShowProfile', () => {
       email: 'pedro@gmail.com',
       phone: '84996658042',
       password: '123123',
+      role_id: 'role-id',
     });
 
     const peter = await showProfile.execute({ user_id: user.id });
@@ -29,12 +30,6 @@ describe('ShowProfile', () => {
   });
 
   it('should not be able to show a user profile with non existing id', async () => {
-    await fakeUsersRepository.create({
-      name: 'Peter',
-      email: 'peter@gmail.com',
-      password: '123123',
-    });
-
     await expect(
       showProfile.execute({
         user_id: 'non-existing-user',

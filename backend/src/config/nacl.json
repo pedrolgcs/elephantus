@@ -1,0 +1,22 @@
+[
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "teacher",
+    "permissions": [
+      {
+        "resource": "classes/*",
+        "methods": ["GET"],
+        "action": "allow"
+      }
+    ]
+  }
+]
