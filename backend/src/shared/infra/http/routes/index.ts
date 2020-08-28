@@ -1,22 +1,14 @@
 import { Router } from 'express';
 import acl from 'express-acl';
 
+// config
+import { config, responseObject } from '@config/acl';
+
 // router version
 import v1 from './api/v1';
 
 /* acl config */
-const configObject = {
-  baseUrl: '/api/v1/',
-  filename: 'nacl.json',
-  path: 'src/config',
-  roleSearchPath: 'user.role',
-};
-const responseObject = {
-  status: 'Access Denied',
-  message: 'You are not authorized to access this resource',
-};
-
-acl.config(configObject, responseObject);
+acl.config(config, responseObject);
 
 // create router
 const routes = Router();

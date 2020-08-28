@@ -4,13 +4,13 @@ import { Router } from 'express';
 import ProfileController from '../controllers/ProfileController';
 
 // Middleware
-import { auth } from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 // inicialize
 const profileRouter = Router();
 const profileController = new ProfileController();
 
-profileRouter.use(auth);
+profileRouter.use(ensureAuthenticated);
 
 profileRouter.get('/', profileController.show);
 

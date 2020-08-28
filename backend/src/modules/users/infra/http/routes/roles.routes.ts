@@ -6,14 +6,14 @@ import acl from 'express-acl';
 import RolesController from '../controllers/RolesController';
 
 // Middleware
-import { auth } from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 // inicialize
 const roleRouter = Router();
 const rolesController = new RolesController();
 
 // acl
-roleRouter.use(auth);
+roleRouter.use(ensureAuthenticated);
 roleRouter.use(acl.authorize);
 
 // routes

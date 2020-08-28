@@ -13,7 +13,7 @@ interface ITokenPayload {
   sub: string;
 }
 
-export function auth(
+export default function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
@@ -33,72 +33,6 @@ export function auth(
 
     /* review later */
     // request.decoded = decoded as ITokenPayload;
-
-    request.user = {
-      id: sub,
-      role,
-    };
-
-    return next();
-  } catch {
-    throw new AppError('Invalid JWT token', 401);
-  }
-}
-
-export function admin(
-  request: Request,
-  response: Response,
-  next: NextFunction,
-): void {
-  const authHeader = request.headers.authorization;
-
-  if (!authHeader) {
-    throw new AppError('JTW token is missing', 401);
-  }
-
-  const [, token] = authHeader.split(' ');
-
-  try {
-    const decoded = verify(token, authConfig.jwt.secret);
-
-    const { sub, role } = decoded as ITokenPayload;
-
-    if (role !== 'admin') {
-      throw new Error();
-    }
-
-    request.user = {
-      id: sub,
-      role,
-    };
-
-    return next();
-  } catch {
-    throw new AppError('Invalid JWT token', 401);
-  }
-}
-
-export function teacher(
-  request: Request,
-  response: Response,
-  next: NextFunction,
-): void {
-  const authHeader = request.headers.authorization;
-
-  if (!authHeader) {
-    throw new AppError('JTW token is missing', 401);
-  }
-
-  const [, token] = authHeader.split(' ');
-
-  try {
-    const decoded = verify(token, authConfig.jwt.secret);
-
-    const { sub, role } = decoded as ITokenPayload;
-
-    if (role !== 'teacher' && role !== 'admin') {
-      throw new Error();
-    }
 
     request.user = {
       id: sub,
