@@ -9,17 +9,29 @@ import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 // inicialize Router
 const routes = Router();
 
-/* index */
+// index
 routes.get('/', (request, response) => {
   return response.status(200).json({ message: 'Hello from API V1' });
 });
 
-/* roles */
+/* roles
+ * [CRUD]
+ */
 routes.use('/roles', rolesRouter);
 
-/* users */
+/* users
+ * [CRUD]
+ */
 routes.use('/users', usersRouter);
+
+/* sessions
+ * [POST]
+ */
 routes.use('/sessions', sessionsRouter);
+
+/* profile
+ * [GET], [PUT]
+ */
 routes.use('/profile', profileRouter);
 
 export default routes;
