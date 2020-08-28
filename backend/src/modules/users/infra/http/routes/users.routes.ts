@@ -17,7 +17,7 @@ userRouter.post(
       phone: Joi.string(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      role_id: Joi.string().uuid().required(),
+      role_id: Joi.string().uuid(),
     },
   }),
   usersController.create,
