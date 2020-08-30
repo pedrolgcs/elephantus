@@ -1,0 +1,2 @@
+// Disk storage
+import './StorageProvider';

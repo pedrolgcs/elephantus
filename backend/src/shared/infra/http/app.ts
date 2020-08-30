@@ -6,6 +6,7 @@ import express, { json, Request, Response, NextFunction } from 'express';
 import { errors } from 'celebrate';
 
 import AppError from '@shared/errors/AppError';
+import uploadConfig from '@config/upload';
 
 import routes from './routes';
 
@@ -23,6 +24,9 @@ app.use(json());
 
 /* routes */
 app.use(routes);
+
+// static folder
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 
 /* celebrate validation errors */
 app.use(errors());

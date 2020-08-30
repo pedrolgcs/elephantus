@@ -1,5 +1,8 @@
 import { container } from 'tsyringe';
 
+// global Providers
+import './providers';
+
 // users Providers
 import '@modules/users/providers';
 

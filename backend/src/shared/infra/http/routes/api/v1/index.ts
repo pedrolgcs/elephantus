@@ -31,6 +31,7 @@ routes.use('/sessions', sessionsRouter);
 
 /* profile
  * [GET], [PUT]
+ * /avatar => [PATCH]
  */
 routes.use('/profile', profileRouter);
 
