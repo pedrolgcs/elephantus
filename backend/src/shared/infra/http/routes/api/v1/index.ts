@@ -3,6 +3,7 @@ import { Router } from 'express';
 // routes
 import rolesRouter from '@modules/users/infra/http/routes/roles.routes';
 import usersRouter from '@modules/users/infra/http/routes/users.routes';
+import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 
@@ -23,6 +24,11 @@ routes.use('/roles', rolesRouter);
  * [CRUD]
  */
 routes.use('/users', usersRouter);
+
+/* password
+ * [POST]
+ */
+routes.use('/password', passwordRouter);
 
 /* sessions
  * [POST]
