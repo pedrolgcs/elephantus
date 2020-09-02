@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 
 // repository
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
@@ -42,8 +42,15 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async findAllUsers(): Promise<User[]> {
-    const users = await this.ormRepository.find();
+  public async findUsers(name: string): Promise<User[]> {
+    const users = await this.ormRepository.find({
+      where: {
+        name: Raw(field => `${field} ILIKE '%${name}%'`),
+      },
+      order: {
+        name: 'ASC',
+      },
+    });
     return users;
   }
 }

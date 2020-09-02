@@ -1,6 +1,6 @@
 import User from '../infra/typeorm/entities/User';
 
-// dtos/
+// dtos
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
 
 export default interface IUsersRepository {
@@ -8,5 +8,5 @@ export default interface IUsersRepository {
   save(user: User): Promise<User>;
   findById(id: string): Promise<User | undefined>;
   findByEmail(email: string): Promise<User | undefined>;
-  findAllUsers(): Promise<User[]>;
+  findUsers(name: string): Promise<User[]>;
 }

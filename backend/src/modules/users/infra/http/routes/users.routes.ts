@@ -9,6 +9,16 @@ const userRouter = Router();
 const usersController = new UsersController();
 
 // routes
+userRouter.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      name: Joi.string(),
+    },
+  }),
+  usersController.index,
+);
+
 userRouter.post(
   '/',
   celebrate({

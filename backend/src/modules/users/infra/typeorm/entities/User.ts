@@ -35,7 +35,7 @@ class User {
   @Column()
   role_id: string;
 
-  @ManyToOne(() => Role, { eager: true })
+  @ManyToOne(() => Role, role => role.users, { eager: true })
   @JoinColumn({ name: 'role_id' })
   role: Role;
 
