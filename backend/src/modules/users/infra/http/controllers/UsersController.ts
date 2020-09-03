@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 // services
 import CreateUserService from '@modules/users/services/users/CreateUserService';
 import ListUsersService from '@modules/users/services/users/ListUsersService';
+import UpdateUserService from '@modules/users/services/users/UpdateUserService';
 
 class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -27,6 +28,23 @@ class UsersController {
       phone,
       email,
       password,
+      role_id,
+    });
+
+    return response.status(201).json(classToClass(user));
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const { name, phone, email, role_id } = request.body;
+
+    const updateUser = container.resolve(UpdateUserService);
+
+    const user = await updateUser.execute({
+      user_id,
+      name,
+      phone,
+      email,
       role_id,
     });
 

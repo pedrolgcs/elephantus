@@ -35,7 +35,10 @@ class User {
   @Column()
   role_id: string;
 
-  @ManyToOne(() => Role, role => role.users, { eager: true })
+  @ManyToOne(() => Role, role => role.users, {
+    eager: true,
+    cascade: ['update'],
+  })
   @JoinColumn({ name: 'role_id' })
   role: Role;
 

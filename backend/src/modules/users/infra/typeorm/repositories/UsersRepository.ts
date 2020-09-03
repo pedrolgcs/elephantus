@@ -23,7 +23,18 @@ class UsersRepository implements IUsersRepository {
   }
 
   public async save(user: User): Promise<User> {
-    return this.ormRepository.save(user);
+    await this.ormRepository
+      .createQueryBuilder()
+      .update(User)
+      .set({
+        name: user.name,
+        phone: user.phone,
+        email: user.email,
+        role_id: user.role_id,
+      })
+      .where('id = :id', { id: user.id })
+      .execute();
+    return this.ormRepository.findOne(user.id);
   }
 
   public async findById(id: string): Promise<User | undefined> {
