@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for users/ShowProfileService.ts</title>
+    <title>Code coverage report for users/DeleteUserService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">users</a> ShowProfileService.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">users</a> DeleteUserService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -87,15 +87,9 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,9 +121,6 @@
 &nbsp;
 import AppError from '@shared/errors/AppError';
 &nbsp;
-// entities
-import User from '@modules/users/infra/typeorm/entities/User';
-&nbsp;
 // repositories
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 &nbsp;
@@ -138,24 +129,24 @@ interface IRequest {
 }
 &nbsp;
 @injectable()
-class ShowProfileService {
+class DeleteUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
 &nbsp;
-  public async execute({ user_id }: IRequest): Promise&lt;User&gt; {
+  public async execute({ user_id }: IRequest): Promise&lt;void&gt; {
     const user = await this.usersRepository.findById(user_id);
 &nbsp;
     if (!user) {
       throw new AppError('user does not exists', 400);
     }
 &nbsp;
-    return user;
+    await this.usersRepository.deleteById(user_id);
   }
 }
 &nbsp;
-export default ShowProfileService;
+export default DeleteUserService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

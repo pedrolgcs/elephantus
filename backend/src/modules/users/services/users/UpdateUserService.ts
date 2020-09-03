@@ -42,12 +42,9 @@ class UpdateUsersService {
       throw new AppError('E-mail already in use');
     }
 
-    user.name = name;
-    user.phone = phone;
-    user.email = email;
-    user.role_id = role_id;
+    const updatedUser = Object.assign(user, { name, phone, email, role_id });
 
-    return this.usersRepository.save(user);
+    return this.usersRepository.save(updatedUser);
   }
 }
 

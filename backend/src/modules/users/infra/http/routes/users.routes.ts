@@ -27,6 +27,16 @@ userRouter.get(
   usersController.index,
 );
 
+userRouter.get(
+  '/:user_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      user_id: Joi.string().uuid().required(),
+    },
+  }),
+  usersController.show,
+);
+
 userRouter.post(
   '/',
   celebrate({
@@ -55,6 +65,16 @@ userRouter.put(
     },
   }),
   usersController.update,
+);
+
+userRouter.delete(
+  '/:user_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      user_id: Joi.string().uuid().required(),
+    },
+  }),
+  usersController.delete,
 );
 
 export default userRouter;

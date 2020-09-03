@@ -4,8 +4,10 @@ import { container } from 'tsyringe';
 
 // services
 import CreateUserService from '@modules/users/services/users/CreateUserService';
+import ShowProfileService from '@modules/users/services/users/ShowProfileService';
 import ListUsersService from '@modules/users/services/users/ListUsersService';
 import UpdateUserService from '@modules/users/services/users/UpdateUserService';
+import DeleteUserService from '@modules/users/services/users/DeleteUserService';
 
 class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -16,6 +18,16 @@ class UsersController {
     const users = await listUser.execute({ name: name.toString() });
 
     return response.status(200).json(classToClass(users));
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+
+    const showProfile = container.resolve(ShowProfileService);
+
+    const user = await showProfile.execute({ user_id });
+
+    return response.status(200).json(classToClass(user));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -49,6 +61,16 @@ class UsersController {
     });
 
     return response.status(201).json(classToClass(user));
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+
+    const deleteUser = container.resolve(DeleteUserService);
+
+    await deleteUser.execute({ user_id });
+
+    return response.status(204).send();
   }
 }
 
