@@ -30,6 +30,10 @@ class FakeRolesRepository implements IRolesRepository {
     this.roles.splice(findIndex, 1);
   }
 
+  public async find(): Promise<Role[]> {
+    return this.roles;
+  }
+
   public async findById(id: string): Promise<Role | undefined> {
     const findRole = this.roles.find(role => role.id === id);
     return findRole;
@@ -38,10 +42,6 @@ class FakeRolesRepository implements IRolesRepository {
   public async findByName(name: string): Promise<Role | undefined> {
     const findRole = this.roles.find(role => role.name === name);
     return findRole;
-  }
-
-  public async findAllRoles(): Promise<Role[]> {
-    return this.roles;
   }
 }
 

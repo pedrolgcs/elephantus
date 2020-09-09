@@ -14,7 +14,7 @@ class ShowAllRolesService {
   ) {}
 
   public async execute(): Promise<Role[]> {
-    const roles = await this.rolesRepository.findAllRoles();
+    const roles = await this.rolesRepository.find();
     return roles;
   }
 }

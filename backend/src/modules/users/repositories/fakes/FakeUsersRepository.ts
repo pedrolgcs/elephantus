@@ -30,6 +30,13 @@ class FakeUsersRepository implements IUsersRepository {
     this.users.splice(findIndex, 1);
   }
 
+  public async find(name?: string): Promise<User[]> {
+    const searchName = new RegExp(name, 'i');
+    const findUsers = this.users.filter(user => searchName.test(user.name));
+
+    return findUsers;
+  }
+
   public async findById(id: string): Promise<User> {
     const findUser = this.users.find(user => user.id === id);
     return findUser;
@@ -38,13 +45,6 @@ class FakeUsersRepository implements IUsersRepository {
   public async findByEmail(email: string): Promise<User> {
     const findUser = this.users.find(user => user.email === email);
     return findUser;
-  }
-
-  public async findUsers(name: string): Promise<User[]> {
-    const searchName = new RegExp(name, 'i');
-    const findUsers = this.users.filter(user => searchName.test(user.name));
-
-    return findUsers;
   }
 }
 

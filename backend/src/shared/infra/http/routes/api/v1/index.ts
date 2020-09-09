@@ -6,6 +6,7 @@ import usersRouter from '@modules/users/infra/http/routes/users.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
+import classroomsRouter from '@modules/classrooms/infra/http/routes/classrooms.routes';
 
 // inicialize Router
 const routes = Router();
@@ -40,5 +41,10 @@ routes.use('/sessions', sessionsRouter);
  * /avatar => [PATCH]
  */
 routes.use('/profile', profileRouter);
+
+/* classrooms
+ * [CRUD]
+ */
+routes.use('/classrooms', classroomsRouter);
 
 export default routes;

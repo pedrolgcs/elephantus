@@ -18,7 +18,7 @@ class ListUsersService {
   ) {}
 
   public async execute({ name }: IRequest): Promise<User[]> {
-    const users = await this.usersRepository.findUsers(name);
+    const users = await this.usersRepository.find(name);
     return users;
   }
 }

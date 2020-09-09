@@ -7,6 +7,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 // repositories
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+
 // providers
 import IHashUser from '@modules/users/providers/HashUser/models/IHashUser';
 
