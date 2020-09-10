@@ -4,7 +4,7 @@ import { shade } from 'polished';
 import signInBackgroundImg from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   align-items: stretch;
@@ -87,12 +87,34 @@ export const Content = styled.div`
 
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 500px) {
+    padding: 5rem 0;
+
+    form {
+      width: 100%;
+      text-align: center;
+
+      input {
+        width: 90%;
+      }
+
+      button {
+        width: 90%;
+      }
+    }
+
+    > a {
+      margin-top: 1rem;
+    }
+  }
 `;
 
 export const Background = styled.div`
