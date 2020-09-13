@@ -95,8 +95,8 @@ export const Content = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 500px) {
-    padding: 5rem 0;
+  @media (max-width: 540px) {
+    margin: 5rem 0;
 
     form {
       width: 100%;
