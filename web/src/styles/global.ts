@@ -13,8 +13,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #312e38;
-    color: #fff;
+    background: var(--white);
+    color: var(--text);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -30,4 +30,14 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  :root {
+    --white: #f7f7f7;
+    --red: #f25748;
+
+    --text: #313131;
+    --input: #FFF8F0;
+    --placeholder: #666360;
+  }
+
 `;
