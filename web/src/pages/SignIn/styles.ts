@@ -1,6 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
+// images
+import signInBackgroundImg from '../../assets/sign-in-background.png';
+
 // animations
 const appearFromLeft = keyframes`
   from {
@@ -22,6 +25,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 100%;
+  max-width: 700px;
 
   animation: ${appearFromLeft} 1.5s;
 
@@ -31,8 +35,8 @@ export const Content = styled.div`
   }
 
   form {
-    margin: 2rem 0;
-    width: 35rem;
+    margin: 3rem 0;
+    width: 38rem;
 
     h1 {
       margin-bottom: 2.4rem;
@@ -60,14 +64,15 @@ export const Content = styled.div`
   }
 
   > a {
-    color: #ff9000;
+    color: var(--link);
     display: block;
+    font-size: 1.8rem;
     margin-top: 2.4rem;
     text-decoration: none;
     transition: color 0.5s;
 
     &:hover {
-      color: ${shade(0.2, '#ff9000')};
+      color: ${shade(0.2, '#1B9AAA')};
     }
 
     svg {
@@ -105,4 +110,10 @@ export const Content = styled.div`
       margin-top: 1rem;
     }
   }
+`;
+
+export const Background = styled.div`
+  flex: 1;
+  background: url(${signInBackgroundImg}) no-repeat center;
+  background-size: cover;
 `;
