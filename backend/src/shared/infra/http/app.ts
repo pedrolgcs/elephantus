@@ -4,6 +4,7 @@ import 'express-async-errors';
 
 import express, { json, Request, Response, NextFunction } from 'express';
 import { errors } from 'celebrate';
+import cors from 'cors';
 
 import AppError from '@shared/errors/AppError';
 import uploadConfig from '@config/upload';
@@ -21,11 +22,12 @@ const app = express();
 
 /* middlewares */
 app.use(json());
+app.use(cors());
 
 /* routes */
 app.use(routes);
 
-// static folder
+/* static folder */
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 
 /* celebrate validation errors */
