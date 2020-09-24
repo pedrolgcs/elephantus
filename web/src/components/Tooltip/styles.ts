@@ -6,8 +6,8 @@ export const Container = styled.div`
   span {
     width: 160px;
     text-align: center;
-    background: var(--blue);
-    color: var(--input);
+    background: var(--tooltipInfo);
+    color: var(--tooltipText);
     padding: 8px;
     border-radius: 4px;
     font-size: 14px;

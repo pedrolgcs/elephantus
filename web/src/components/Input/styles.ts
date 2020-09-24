@@ -65,14 +65,14 @@ export const Error = styled(Tooltip)`
 
   > svg {
     margin: 0;
-    color: var(--red);
+    color: var(--tooltipError);
   }
 
   span {
-    background: var(--red);
+    background: var(--tooltipError);
 
     &::before {
-      border-color: var(--red) transparent;
+      border-color: var(--tooltipError) transparent;
     }
   }
 `;

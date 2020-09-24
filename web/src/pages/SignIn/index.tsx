@@ -19,6 +19,7 @@ import Button from '../../components/Button';
 
 // context
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 interface SignInFormData {
   email: string;
@@ -28,6 +29,7 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -44,7 +46,7 @@ const SignIn: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
@@ -57,11 +59,14 @@ const SignIn: React.FC = () => {
           return;
         }
 
-        // trigger toast
-        console.log(err);
+        addToast({
+          type: 'error',
+          title: 'Error na autenticação',
+          description: 'Ocorreu um erro ao fazer logon, virique seus dados',
+        });
       }
     },
-    [signIn],
+    [signIn, addToast],
   );
 
   return (

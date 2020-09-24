@@ -46,6 +46,11 @@ export default createGlobalStyle`
     /* utils */
     --link: #1B9AAA;
 
+    /* tooltip */
+    --tooltipText: #f7f7f7;
+    --tooltipInfo: #70ABAF;
+    --tooltipError: #f25748;
+
     /* toast */
     --toastInfo: #ebf8ff;
     --toastInfoText: #3172b7;
