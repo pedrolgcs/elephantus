@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+// components
 import Tooltip from '../Tooltip';
 
 interface ContainerProps {
@@ -24,20 +25,20 @@ export const Container = styled.div<ContainerProps>`
   ${props =>
     props.isErrored &&
     css`
-      border-color: var(--red);
+      border-color: var(--inputError);
     `}
 
   ${props =>
     props.isFocused &&
     css`
-      color: var(--blue);
-      border-color: var(--blue);
+      color: var(--inputFocus);
+      border-color: var(--inputFocus);
     `}
 
   ${props =>
     props.isFilled &&
     css`
-      color: var(--green);
+      color: var(--inputSuccess);
       border-color: transparent;
     `}
 

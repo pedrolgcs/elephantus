@@ -56,6 +56,8 @@ const SignIn: React.FC = () => {
 
           return;
         }
+
+        // trigger toast
         console.log(err);
       }
     },

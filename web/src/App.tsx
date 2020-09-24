@@ -6,6 +6,9 @@ import GlobalStyle from './styles/global';
 // context
 import AppProvider from './hooks';
 
+// components
+import ToastContainer from './components/ToastContainer';
+
 // pages temporary
 import SignIn from './pages/SignIn';
 
@@ -15,6 +18,7 @@ const App: React.FC = () => (
     <AppProvider>
       <SignIn />
     </AppProvider>
+    <ToastContainer />
   </>
 );
 

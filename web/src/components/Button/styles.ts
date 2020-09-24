@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.button`
-  background: var(--red);
+  background: var(--buttonRed);
   height: 56px;
   border-radius: 1rem;
   border: 0;

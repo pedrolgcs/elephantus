@@ -33,14 +33,26 @@ export default createGlobalStyle`
 
   :root {
     --white: #f7f7f7;
-    --red: #f25748;
-    --green: #70B77E;
-    --blue: #70ABAF;
 
     --text: #313131;
     --input: #FFF8F0;
     --placeholder: #666360;
+    --inputFocus: #70ABAF;
+    --inputError: #f25748;
+    --inputSuccess: #70B77E;
+
+    --buttonRed: #f25748;
+
+    /* utils */
     --link: #1B9AAA;
+
+    /* toast */
+    --toastInfo: #ebf8ff;
+    --toastInfoText: #3172b7;
+    --toastSuccess: #e6fffa;
+    --toastSuccessText: #2e656a;
+    --toastError: #fddede;
+    --toastErrorText: #c53030;
   }
 
 `;
