@@ -28,6 +28,7 @@ class UsersRepository implements IUsersRepository {
       .update(User)
       .set({
         name: user.name,
+        avatar: user.avatar,
         phone: user.phone,
         email: user.email,
         role_id: user.role_id,

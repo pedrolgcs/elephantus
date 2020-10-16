@@ -47,9 +47,13 @@ class UpdateProfileService {
       throw new AppError('E-mail already in use');
     }
 
-    user.name = name;
-    user.email = email;
-    user.phone = phone;
+    Object.assign(user, { name, email, phone });
+
+    /*
+      user.name = name;
+      user.email = email;
+      user.phone = phone;
+    */
 
     if (password && !old_password) {
       throw new AppError(
@@ -67,6 +71,7 @@ class UpdateProfileService {
         throw new AppError('Old password does not match');
       }
 
+      // update password
       user.password = await this.hashUser.generateHash(password);
     }
 

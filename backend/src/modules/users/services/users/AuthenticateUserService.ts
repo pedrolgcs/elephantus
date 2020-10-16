@@ -50,7 +50,8 @@ class AuthenticateUserService {
 
     const { secret, expiresIn } = authConfig.jwt;
 
-    const role = user.role ? user.role.name : null;
+    // isRole? by default is Auth
+    const role = user.role ? user.role.name : 'auth';
 
     const token = sign({ role }, secret, {
       subject: user.id,
