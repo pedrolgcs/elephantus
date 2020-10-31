@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 import ListRolesService from '@modules/users/services/roles/ListRolesService';
 import CreateRoleService from '@modules/users/services/roles/CreateRoleService';
 import ShowRoleService from '@modules/users/services/roles/ShowRoleService';
+import UpdateRoleService from '@modules/users/services/roles/UpdateRoleService';
 import DeleteRoleService from '@modules/users/services/roles/DeleteRoleService';
 
 class RolesController {
@@ -34,6 +35,17 @@ class RolesController {
     const role = await showRole.execute({ role_id });
 
     return response.status(200).json(role);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { name } = request.body;
+    const { role_id } = request.params;
+
+    const updateRole = container.resolve(UpdateRoleService);
+
+    const role = await updateRole.execute({ name, role_id });
+
+    return response.status(201).json(role);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

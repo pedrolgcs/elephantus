@@ -39,6 +39,19 @@ roleRouter.get(
   rolesController.show,
 );
 
+roleRouter.put(
+  '/:role_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      role_id: Joi.string().uuid().required(),
+    },
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+    },
+  }),
+  rolesController.update,
+);
+
 roleRouter.delete(
   '/:role_id',
   celebrate({

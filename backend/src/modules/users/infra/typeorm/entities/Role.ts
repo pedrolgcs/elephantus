@@ -18,7 +18,7 @@ class Role {
   @Column()
   name: string;
 
-  @OneToMany(() => User, user => user.role)
+  @OneToMany(() => User, user => user.role, { lazy: true })
   users: User[];
 
   @CreateDateColumn()
