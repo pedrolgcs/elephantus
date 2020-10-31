@@ -24,6 +24,7 @@ class Classroom {
   @Column()
   user_id: string;
 
+  // many classes have a one user [teacher]
   @ManyToOne(() => User, user => user.classrooms)
   @JoinColumn({ name: 'user_id' })
   user: User;

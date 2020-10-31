@@ -2,14 +2,14 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 // service
-import ShowAllRolesService from '@modules/users/services/roles/ShowAllRolesService';
+import ListRolesService from '@modules/users/services/roles/ListRolesService';
 import CreateRoleService from '@modules/users/services/roles/CreateRoleService';
 import ShowRoleService from '@modules/users/services/roles/ShowRoleService';
 import DeleteRoleService from '@modules/users/services/roles/DeleteRoleService';
 
 class RolesController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const showAllRoles = container.resolve(ShowAllRolesService);
+    const showAllRoles = container.resolve(ListRolesService);
 
     const roles = await showAllRoles.execute();
 

@@ -7,7 +7,7 @@ import Role from '@modules/users/infra/typeorm/entities/Role';
 import IRolesRepository from '@modules/users/repositories/IRolesRepository';
 
 @injectable()
-class ShowAllRolesService {
+class ListRolesService {
   constructor(
     @inject('RolesRepository')
     private rolesRepository: IRolesRepository,
@@ -19,4 +19,4 @@ class ShowAllRolesService {
   }
 }
 
-export default ShowAllRolesService;
+export default ListRolesService;
