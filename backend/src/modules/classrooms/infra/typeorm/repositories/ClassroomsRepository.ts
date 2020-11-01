@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 
 // repository
 import IClassroomsRepository from '@modules/classrooms/repositories/IClassroomsRepository';
@@ -40,8 +40,11 @@ class ClassroomsRepository implements IClassroomsRepository {
     await this.ormRepository.delete(id);
   }
 
-  public async find(): Promise<Classroom[]> {
+  public async find(name: string): Promise<Classroom[]> {
     const classrooms = await this.ormRepository.find({
+      where: {
+        name: Raw(field => `${field} ILIKE '%${name}%'`),
+      },
       order: {
         name: 'ASC',
       },

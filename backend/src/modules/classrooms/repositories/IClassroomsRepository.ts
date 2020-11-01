@@ -7,7 +7,7 @@ export default interface IClassroomsRepository {
   create(data: ICreateClassroomDTO): Promise<Classroom>;
   save(classroom: Classroom): Promise<Classroom>;
   deleteById(id: string): Promise<void>;
-  find(): Promise<Classroom[]>;
+  find(name?: string): Promise<Classroom[]>;
   findById(id: string): Promise<Classroom | undefined>;
   findByNameAndShift(
     name: string,

@@ -32,8 +32,13 @@ class FakeClassroomsRepository implements IClassroomsRepository {
     this.classrooms.splice(findIndex, 1);
   }
 
-  public async find(): Promise<Classroom[]> {
-    return this.classrooms;
+  public async find(name?: string): Promise<Classroom[]> {
+    const searchName = new RegExp(name, 'i');
+    const findRoles = this.classrooms.filter(user =>
+      searchName.test(user.name),
+    );
+
+    return findRoles;
   }
 
   public async findById(id: string): Promise<Classroom | undefined> {

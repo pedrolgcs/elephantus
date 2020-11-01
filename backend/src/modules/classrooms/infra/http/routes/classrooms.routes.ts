@@ -16,6 +16,16 @@ const classroomsController = new ClassroomsController();
 classroomsRouter.use(ensureAuthenticated);
 classroomsRouter.use(acl.authorize);
 
+classroomsRouter.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      name: Joi.string().default(''),
+    },
+  }),
+  classroomsController.index,
+);
+
 classroomsRouter.post(
   '/',
   celebrate({
