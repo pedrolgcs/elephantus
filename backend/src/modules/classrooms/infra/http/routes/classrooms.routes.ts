@@ -38,4 +38,14 @@ classroomsRouter.post(
   classroomsController.create,
 );
 
+classroomsRouter.get(
+  '/:classroom_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      classroom_id: Joi.string().uuid().required(),
+    },
+  }),
+  classroomsController.show,
+);
+
 export default classroomsRouter;

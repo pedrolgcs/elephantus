@@ -35,7 +35,7 @@ class UsersRepository implements IUsersRepository {
       })
       .where('id = :id', { id: user.id })
       .execute();
-    return this.ormRepository.findOne(user.id);
+    return this.ormRepository.findOne(user.id, { relations: ['classrooms'] });
   }
 
   public async deleteById(id: string): Promise<void> {
@@ -47,6 +47,7 @@ class UsersRepository implements IUsersRepository {
       where: {
         name: Raw(field => `${field} ILIKE '%${name}%'`),
       },
+      relations: ['classrooms'],
       order: {
         name: 'ASC',
       },
@@ -57,7 +58,7 @@ class UsersRepository implements IUsersRepository {
   public async findById(id: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
       where: { id },
-      relations: ['role'],
+      relations: ['role', 'classrooms'],
     });
     return user;
   }

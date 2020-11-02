@@ -43,7 +43,7 @@ class User {
   role: Role;
 
   // one user have many classes
-  @OneToMany(() => Classroom, classroom => classroom.user, { eager: true })
+  @OneToMany(() => Classroom, classroom => classroom.user)
   classrooms: Classroom[];
 
   @CreateDateColumn()

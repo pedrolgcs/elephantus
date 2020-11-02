@@ -9,7 +9,7 @@ import ListClassroomsService from './ListClassroomsService';
 let fakeClassroomsRepository: FakeClassroomsRepository;
 let listClassrooms: ListClassroomsService;
 
-describe('List Classrooms', () => {
+describe('ListClassrooms', () => {
   beforeEach(() => {
     fakeClassroomsRepository = new FakeClassroomsRepository();
     listClassrooms = new ListClassroomsService(fakeClassroomsRepository);

@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 // services
 import ListClassroomsService from '@modules/classrooms/services/ListClassroomsService';
 import CreateClassroomService from '@modules/classrooms/services/CreateClassroomService';
+import ShowClassroomService from '@modules/classrooms/services/ShowClassroomService';
 
 class ClassroomsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -24,6 +26,16 @@ class ClassroomsController {
     const classroom = await createClassroom.execute({ name, shift, user_id });
 
     return response.status(201).json(classroom);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { classroom_id } = request.params;
+
+    const showClassroom = container.resolve(ShowClassroomService);
+
+    const classroom = await showClassroom.execute({ classroom_id });
+
+    return response.status(200).json(classToClass(classroom));
   }
 }
 
