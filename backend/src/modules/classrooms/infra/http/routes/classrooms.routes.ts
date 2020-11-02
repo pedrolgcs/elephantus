@@ -32,7 +32,7 @@ classroomsRouter.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       shift: Joi.string().valid('morning', 'afternoon', 'night').required(),
-      user_id: Joi.string().uuid().required(),
+      user_id: Joi.string().uuid(),
     },
   }),
   classroomsController.create,
@@ -46,6 +46,21 @@ classroomsRouter.get(
     },
   }),
   classroomsController.show,
+);
+
+classroomsRouter.put(
+  '/:classroom_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      classroom_id: Joi.string().uuid().required(),
+    },
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      shift: Joi.string().valid('morning', 'afternoon', 'night').required(),
+      user_id: Joi.string().uuid(),
+    },
+  }),
+  classroomsController.update,
 );
 
 export default classroomsRouter;

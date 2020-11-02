@@ -6,6 +6,7 @@ import { classToClass } from 'class-transformer';
 import ListClassroomsService from '@modules/classrooms/services/ListClassroomsService';
 import CreateClassroomService from '@modules/classrooms/services/CreateClassroomService';
 import ShowClassroomService from '@modules/classrooms/services/ShowClassroomService';
+import UpdateClassroomService from '@modules/classrooms/services/UpdateClassroomService';
 
 class ClassroomsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -36,6 +37,22 @@ class ClassroomsController {
     const classroom = await showClassroom.execute({ classroom_id });
 
     return response.status(200).json(classToClass(classroom));
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { classroom_id } = request.params;
+    const { name, shift, user_id } = request.body;
+
+    const updateClassroom = container.resolve(UpdateClassroomService);
+
+    const classroom = await updateClassroom.execute({
+      classroom_id,
+      name,
+      shift,
+      user_id,
+    });
+
+    return response.status(201).json(classToClass(classroom));
   }
 }
 

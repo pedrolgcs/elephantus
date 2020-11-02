@@ -33,7 +33,7 @@ class ClassroomsRepository implements IClassroomsRepository {
       })
       .where('id = :id', { id: classroom.id })
       .execute();
-    return this.ormRepository.findOne(classroom.id);
+    return this.ormRepository.findOne(classroom.id, { relations: ['user'] });
   }
 
   public async deleteById(id: string): Promise<void> {
