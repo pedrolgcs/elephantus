@@ -63,4 +63,14 @@ classroomsRouter.put(
   classroomsController.update,
 );
 
+classroomsRouter.delete(
+  '/:classroom_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      classroom_id: Joi.string().uuid().required(),
+    },
+  }),
+  classroomsController.delete,
+);
+
 export default classroomsRouter;

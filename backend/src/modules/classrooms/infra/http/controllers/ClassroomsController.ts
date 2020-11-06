@@ -7,6 +7,7 @@ import ListClassroomsService from '@modules/classrooms/services/ListClassroomsSe
 import CreateClassroomService from '@modules/classrooms/services/CreateClassroomService';
 import ShowClassroomService from '@modules/classrooms/services/ShowClassroomService';
 import UpdateClassroomService from '@modules/classrooms/services/UpdateClassroomService';
+import DeleteClassroomService from '@modules/classrooms/services/DeleteClassroomService';
 
 class ClassroomsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -53,6 +54,16 @@ class ClassroomsController {
     });
 
     return response.status(201).json(classToClass(classroom));
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { classroom_id } = request.params;
+
+    const deleteClassroom = container.resolve(DeleteClassroomService);
+
+    await deleteClassroom.execute({ classroom_id });
+
+    return response.status(204).send();
   }
 }
 
