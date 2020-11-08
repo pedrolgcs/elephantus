@@ -33,9 +33,9 @@ class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, phone, email, password, role_id } = request.body;
 
-    const creatUser = container.resolve(CreateUserService);
+    const createUser = container.resolve(CreateUserService);
 
-    const user = await creatUser.execute({
+    const user = await createUser.execute({
       name,
       phone,
       email,

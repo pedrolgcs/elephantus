@@ -18,6 +18,10 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IClassroomsRepository from '@modules/classrooms/repositories/IClassroomsRepository';
 import ClassroomsRepository from '@modules/classrooms/infra/typeorm/repositories/ClassroomsRepository';
 
+// notices Repository
+import INoticesRepository from '@modules/notices/repositories/INoticesRepository';
+import NoticesRepositrory from '@modules/notices/infra/typeorm/repositories/NoticesRepository';
+
 container.registerSingleton<IRolesRepository>(
   'RolesRepository',
   RolesRepository,
@@ -31,4 +35,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IClassroomsRepository>(
   'ClassroomsRepository',
   ClassroomsRepository,
+);
+
+container.registerSingleton<INoticesRepository>(
+  'NoticesRepository',
+  NoticesRepositrory,
 );
