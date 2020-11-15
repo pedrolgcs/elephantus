@@ -1,5 +1,6 @@
 export default interface ICreateNoticeDTO {
   title: string;
   notice: string;
-  classroom_id: string;
+  all?: boolean;
+  classroom_id?: string;
 }

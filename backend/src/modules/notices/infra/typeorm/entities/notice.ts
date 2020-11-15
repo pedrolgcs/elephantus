@@ -21,6 +21,9 @@ class Notice {
   @Column('text')
   notice: string;
 
+  @Column('boolean')
+  all: boolean;
+
   @Column()
   classroom_id: string;
 

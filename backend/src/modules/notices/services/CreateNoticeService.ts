@@ -9,6 +9,7 @@ import INoticesRepository from '@modules/notices/repositories/INoticesRepository
 interface IRequest {
   title: string;
   notice: string;
+  all?: boolean;
   classroom_id?: string;
 }
 
@@ -22,11 +23,13 @@ class CreateNoticeService {
   public async execute({
     title,
     notice,
+    all,
     classroom_id,
   }: IRequest): Promise<Notice> {
     const newNotice = await this.noticesRepository.create({
       title,
       notice,
+      all,
       classroom_id,
     });
 

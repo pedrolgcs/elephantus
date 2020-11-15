@@ -17,7 +17,18 @@ describe('CreateNotice', () => {
     const notice = await createNotice.execute({
       title: 'Notice Title',
       notice: 'Notice text',
+      all: false,
       classroom_id: 'classroom_id',
+    });
+
+    expect(notice).toHaveProperty('id');
+  });
+
+  it('should be able to create a new notice without classroom', async () => {
+    const notice = await createNotice.execute({
+      title: 'Notice Title',
+      all: false,
+      notice: 'Notice text',
     });
 
     expect(notice).toHaveProperty('id');
