@@ -9,7 +9,7 @@ import INoticesRepository from '@modules/notices/repositories/INoticesRepository
 interface IRequest {
   title: string;
   notice: string;
-  all?: boolean;
+  all: boolean;
   classroom_id?: string;
 }
 

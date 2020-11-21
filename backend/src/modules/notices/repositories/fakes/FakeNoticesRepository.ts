@@ -33,7 +33,13 @@ class FakeNoticesRepository implements INoticeRepository {
   }
 
   public async find(): Promise<Notice[]> {
-    return this.notices;
+    const notices = this.notices.filter(notice => notice.all === true);
+    return notices;
+  }
+
+  public async findByClassroom(id: string): Promise<Notice[]> {
+    const notices = this.notices.filter(notice => notice.classroom_id === id);
+    return notices;
   }
 
   public async findById(id: string): Promise<Notice | undefined> {

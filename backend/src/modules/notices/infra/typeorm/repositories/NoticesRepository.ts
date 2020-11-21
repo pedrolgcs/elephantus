@@ -32,10 +32,22 @@ class NoticesRepository implements INoticesRepository {
 
   public async find(): Promise<Notice[]> {
     const notices = await this.ormRepository.find({
+      where: { all: true },
       order: {
         created_at: 'DESC',
       },
     });
+    return notices;
+  }
+
+  public async findByClassroom(id: string): Promise<Notice[]> {
+    const notices = await this.ormRepository.find({
+      where: { classroom_id: id, all: false },
+      order: {
+        created_at: 'DESC',
+      },
+    });
+
     return notices;
   }
 

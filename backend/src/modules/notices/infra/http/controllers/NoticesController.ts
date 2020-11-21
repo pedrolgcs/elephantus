@@ -2,10 +2,19 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 // services
+import ListNoticesService from '@modules/notices/services/ListNoticesService';
 import CreateNoticeService from '@modules/notices/services/CreateNoticeService';
 import ShowNoticeService from '@modules/notices/services/ShowNoticeService';
 
 class NoticesController {
+  public async index(_: Request, response: Response): Promise<Response> {
+    const listNotices = container.resolve(ListNoticesService);
+
+    const notices = await listNotices.execute();
+
+    return response.status(200).json(notices);
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
     const { title, notice, all, classroom_id } = request.body;
 

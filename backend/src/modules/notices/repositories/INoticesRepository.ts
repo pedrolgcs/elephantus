@@ -8,5 +8,6 @@ export default interface INoticeRepository {
   save(notice: Notice): Promise<Notice>;
   deleteById(id: string): Promise<void>;
   find(): Promise<Notice[]>;
+  findByClassroom(id: string): Promise<Notice[]>;
   findById(id: string): Promise<Notice | undefined>;
 }
