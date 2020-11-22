@@ -16,6 +16,11 @@
         "resource": "classes/*",
         "methods": ["GET"],
         "action": "allow"
+      },
+      {
+        "resource": "notices/*",
+        "methods": "*",
+        "action": "allow"
       }
     ]
   }

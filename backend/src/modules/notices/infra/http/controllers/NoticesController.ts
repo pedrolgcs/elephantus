@@ -6,6 +6,7 @@ import ListNoticesService from '@modules/notices/services/ListNoticesService';
 import CreateNoticeService from '@modules/notices/services/CreateNoticeService';
 import ShowNoticeService from '@modules/notices/services/ShowNoticeService';
 import UpdateNoticeService from '@modules/notices/services/UpdateNoticeService';
+import DeleteNoticeService from '@modules/notices/services/DeleteNoticeService';
 
 class NoticesController {
   public async index(_: Request, response: Response): Promise<Response> {
@@ -54,6 +55,16 @@ class NoticesController {
     });
 
     return response.status(201).json(updatedNotice);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { notice_id } = request.params;
+
+    const deleteNotice = container.resolve(DeleteNoticeService);
+
+    await deleteNotice.execute({ notice_id });
+
+    return response.status(204).send();
   }
 }
 

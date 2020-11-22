@@ -66,7 +66,7 @@ noticeRouter.post(
 );
 
 /**
- * Update a notice by ID
+ * Update notice by ID
  */
 noticeRouter.put(
   '/:notice_id',
@@ -80,6 +80,19 @@ noticeRouter.put(
     },
   }),
   noticeController.update,
+);
+
+/**
+ * Delete notice by ID
+ */
+noticeRouter.delete(
+  '/:notice_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      notice_id: Joi.string().uuid().required(),
+    },
+  }),
+  noticeController.delete,
 );
 
 export default noticeRouter;
