@@ -15,6 +15,11 @@ const noticeController = new NoticesController();
 const noticesClassroomController = new NoticesClassroomController();
 
 /**
+ * Show all notices with all is true
+ */
+noticeRouter.get('/', noticeController.index);
+
+/**
  * Show notice by ID
  */
 noticeRouter.get(
@@ -26,11 +31,6 @@ noticeRouter.get(
   }),
   noticeController.show,
 );
-
-/**
- * Show all notices with all is true
- */
-noticeRouter.get('/', noticeController.index);
 
 /**
  * Show notices by classroom_id
@@ -63,6 +63,23 @@ noticeRouter.post(
     },
   }),
   noticeController.create,
+);
+
+/**
+ * Update a notice by ID
+ */
+noticeRouter.put(
+  '/:notice_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      notice_id: Joi.string().uuid().required(),
+    },
+    [Segments.BODY]: {
+      title: Joi.string().required(),
+      notice: Joi.string().required(),
+    },
+  }),
+  noticeController.update,
 );
 
 export default noticeRouter;

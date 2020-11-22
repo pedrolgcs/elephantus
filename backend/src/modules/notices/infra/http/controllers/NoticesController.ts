@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 import ListNoticesService from '@modules/notices/services/ListNoticesService';
 import CreateNoticeService from '@modules/notices/services/CreateNoticeService';
 import ShowNoticeService from '@modules/notices/services/ShowNoticeService';
+import UpdateNoticeService from '@modules/notices/services/UpdateNoticeService';
 
 class NoticesController {
   public async index(_: Request, response: Response): Promise<Response> {
@@ -38,6 +39,21 @@ class NoticesController {
     const notice = await showNotice.execute({ notice_id });
 
     return response.status(200).json(notice);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { notice_id } = request.params;
+    const { title, notice } = request.body;
+
+    const updateNotice = container.resolve(UpdateNoticeService);
+
+    const updatedNotice = await updateNotice.execute({
+      notice_id,
+      title,
+      notice,
+    });
+
+    return response.status(201).json(updatedNotice);
   }
 }
 

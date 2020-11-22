@@ -19,6 +19,7 @@ describe('ShowNotice', () => {
     const notice = await fakeNoticesRepository.create({
       title: 'Notice 01',
       notice: 'Notice description',
+      all: false,
       classroom_id: 'classroom_id',
     });
 
