@@ -20,7 +20,11 @@ import ClassroomsRepository from '@modules/classrooms/infra/typeorm/repositories
 
 // notices Repository
 import INoticesRepository from '@modules/notices/repositories/INoticesRepository';
-import NoticesRepositrory from '@modules/notices/infra/typeorm/repositories/NoticesRepository';
+import NoticesRepository from '@modules/notices/infra/typeorm/repositories/NoticesRepository';
+
+// reminders Repository
+import IRemindersRepository from '@modules/reminders/repositories/IRemindersRepository';
+import RemindersRepository from 'modules/reminders/infra/typeorm/repositories/RemindersRepository';
 
 container.registerSingleton<IRolesRepository>(
   'RolesRepository',
@@ -39,5 +43,10 @@ container.registerSingleton<IClassroomsRepository>(
 
 container.registerSingleton<INoticesRepository>(
   'NoticesRepository',
-  NoticesRepositrory,
+  NoticesRepository,
+);
+
+container.registerSingleton<IRemindersRepository>(
+  'RemindersRepository',
+  RemindersRepository,
 );

@@ -17,7 +17,7 @@ class NoticesRepository implements INoticesRepository {
   }
 
   public async create(data: ICreateNoticeDTO): Promise<Notice> {
-    const notice = await this.ormRepository.create(data);
+    const notice = this.ormRepository.create(data);
     await this.ormRepository.save(notice);
     return notice;
   }

@@ -10,14 +10,7 @@ import {
 
 import Classroom from '@modules/classrooms/infra/typeorm/entities/Classroom';
 
-enum Days {
-  Mon,
-  Tue,
-  Wed,
-  Thu,
-  Fri,
-  Sat,
-}
+export type Days = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat';
 
 @Entity('reminders')
 class Reminder {
