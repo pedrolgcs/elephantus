@@ -3,7 +3,7 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 
 // entities
-import Notice from 'modules/notices/infra/typeorm/entities/notice';
+import Notice from 'modules/notices/infra/typeorm/entities/Notice';
 
 // interfaces
 import INoticesRepository from 'modules/notices/repositories/INoticesRepository';

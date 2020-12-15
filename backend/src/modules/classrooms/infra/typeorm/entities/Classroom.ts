@@ -10,7 +10,8 @@ import {
 } from 'typeorm';
 
 import User from '@modules/users/infra/typeorm/entities/User';
-import Notice from '@modules/notices/infra/typeorm/entities/notice';
+import Notice from '@modules/notices/infra/typeorm/entities/Notice';
+import Reminder from '@modules/reminders/infra/typeorm/entities/Reminder';
 
 @Entity('classrooms')
 class Classroom {
@@ -34,6 +35,10 @@ class Classroom {
   // one classroom have a many notices
   @OneToMany(() => Notice, notice => notice.classroom)
   notices: Notice[];
+
+  // one classroom have a many reminders
+  @OneToMany(() => Reminder, reminder => reminder.classroom)
+  reminders: Reminder[];
 
   @CreateDateColumn()
   created_at: Date;

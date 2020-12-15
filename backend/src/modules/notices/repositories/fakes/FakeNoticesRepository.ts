@@ -1,7 +1,7 @@
 import { v4 } from 'uuid';
 
 // entities
-import Notice from '@modules/notices/infra/typeorm/entities/notice';
+import Notice from '@modules/notices/infra/typeorm/entities/Notice';
 
 // dtos
 import ICreateNoticeDTO from '@modules/notices/dtos/ICreateNoticeDTO';

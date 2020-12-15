@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
 // entities
-import Notice from '@modules/notices/infra/typeorm/entities/notice';
+import Notice from '@modules/notices/infra/typeorm/entities/Notice';
 
 // interfaces
 import INoticesRepository from '@modules/notices/repositories/INoticesRepository';

@@ -1,4 +1,4 @@
-import Notice from '../infra/typeorm/entities/notice';
+import Notice from '../infra/typeorm/entities/Notice';
 
 // dtos
 import ICreateNoticeDTO from '../dtos/ICreateNoticeDTO';

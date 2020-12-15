@@ -7,7 +7,7 @@ import INoticesRepository from '@modules/notices/repositories/INoticesRepository
 import ICreateNoticeDTO from '@modules/notices/dtos/ICreateNoticeDTO';
 
 // entities
-import Notice from '@modules/notices/infra/typeorm/entities/notice';
+import Notice from '@modules/notices/infra/typeorm/entities/Notice';
 
 class NoticesRepository implements INoticesRepository {
   private ormRepository: Repository<Notice>;
