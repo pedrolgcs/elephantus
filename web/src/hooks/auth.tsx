@@ -4,9 +4,17 @@ import jwt from 'jsonwebtoken';
 // services
 import api from '../services/api';
 
+interface User {
+  id: string;
+  avatarUrl?: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 interface AuthState {
   token: string;
-  user: Record<string, unknown> & { role: Record<string, unknown> };
+  user: User;
 }
 
 // signIn data interface
@@ -17,7 +25,7 @@ interface SignInCredentials {
 
 // return interface methods
 interface AuthContextData {
-  user: Record<string, unknown> & { role: Record<string, unknown> };
+  user: User;
   signIn(data: SignInCredentials): Promise<void>;
   signOut(): void;
 }

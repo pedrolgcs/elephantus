@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { FiMail, FiLock, FiLink2 } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -58,9 +59,7 @@ const SignIn: React.FC = () => {
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErros(err);
-
           formRef.current?.setErrors(errors);
-
           return;
         }
 
@@ -90,10 +89,10 @@ const SignIn: React.FC = () => {
           <Button type="submit">Entrar</Button>
         </Form>
 
-        <a href="/signup">
+        <Link to="/forgotpassword">
           <FiLink2 />
           Esqueci minha senha
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>
