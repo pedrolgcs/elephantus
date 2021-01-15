@@ -5,3 +5,7 @@ export const Background = styled.View`
   background: #fbfbff;
 `;
 export const Scroll = styled.ScrollView``;
+
+export const KeyboardAvoiding = styled.KeyboardAvoidingView`
+  flex: 1;
+`;

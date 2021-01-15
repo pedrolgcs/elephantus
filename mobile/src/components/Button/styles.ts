@@ -12,7 +12,7 @@ export const Container = styled(RectButton)`
 `;
 
 export const Text = styled.Text`
-  font-family: 'RobotoSlab-Medium';
+  font-family: 'Nunito-Bold';
   color: #fbfbff;
   font-size: 18px;
 `;

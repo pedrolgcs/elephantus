@@ -6,15 +6,15 @@ interface IBackgroundProps {
   scrollable?: boolean;
 }
 
-const Container: React.FC<IBackgroundProps> = ({
-  children,
-  scrollable = false,
-}) => (
+const Container: React.FC<IBackgroundProps> = ({ children, scrollable }) => (
   <>
     {scrollable ? (
-      <Styled.Background>
-        <Styled.Scroll>{children}</Styled.Scroll>
-      </Styled.Background>
+      <Styled.Scroll
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        <Styled.Background>{children}</Styled.Background>
+      </Styled.Scroll>
     ) : (
       <Styled.Background>{children}</Styled.Background>
     )}
@@ -27,10 +27,14 @@ const Background: React.FC<IBackgroundProps> = ({
 }) => (
   <>
     {Platform.OS === 'ios' ? (
+      // IOS
       <SafeAreaView style={{ flex: 1 }}>
-        <Container scrollable={scrollable}>{children}</Container>
+        <Styled.KeyboardAvoiding behavior="padding" enabled>
+          <Container scrollable={scrollable}>{children}</Container>
+        </Styled.KeyboardAvoiding>
       </SafeAreaView>
     ) : (
+      // Android
       <Container scrollable={scrollable}>{children}</Container>
     )}
   </>

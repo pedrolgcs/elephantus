@@ -4,7 +4,7 @@ import { TextInputProps } from 'react-native';
 // styles
 import * as Styled from './styles';
 
-interface InputProps extends TextInputProps {
+export interface InputProps extends TextInputProps {
   name: string;
   icon?: string;
 }
@@ -12,7 +12,7 @@ interface InputProps extends TextInputProps {
 const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
   return (
     <Styled.Container>
-      {icon && <Styled.InputIcon name={icon} size={20} color="#666370" />}
+      {icon && <Styled.InputIcon name={icon} size={20} color="#3F4045" />}
       <Styled.TextInput {...rest} keyboardAppearance="default" />
     </Styled.Container>
   );

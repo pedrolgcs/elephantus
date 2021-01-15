@@ -10,13 +10,12 @@ export const Container = styled.View`
 export const Logo = styled.Image`
   max-height: 150px;
   max-width: 170px;
-  margin-bottom: 30px;
   border-radius: 20px;
 `;
 
 export const Title = styled.Text`
   font-size: 22px;
-  color: #4b5267;
-  font-family: 'RobotoSlab-Medium';
-  margin: 40px 0 25px;
+  color: #3f4045;
+  font-family: 'Nunito-Regular';
+  margin: 40px 0 10px;
 `;
