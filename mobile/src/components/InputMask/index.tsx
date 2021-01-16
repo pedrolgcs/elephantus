@@ -1,36 +1,78 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useField } from '@unform/core';
 import { TextInputMask, TextInputMaskProps } from 'react-native-masked-text';
 
-// components
-import Input from '../Input';
+// styles
+import * as Styled from './styles';
 
-interface InputMaskProps extends TextInputMaskProps {
+interface InputMaskRef extends TextInputMask {
+  value: string;
+  rawValue: string;
+}
+
+interface InputMaskProps extends Omit<TextInputMaskProps, 'defaultValue'> {
   name: string;
   icon?: string;
 }
 
-const InputMask: React.FC<InputMaskProps> = ({ type, ...rest }) => {
-  const [value, setValue] = useState('');
-  const [rawValue, setRawValue] = useState('');
+const InputMask: React.FC<InputMaskProps> = ({
+  name,
+  icon,
+  onChangeText,
+  ...rest
+}) => {
+  const inputRef = useRef<InputMaskRef>(null);
+  const { fieldName, registerField, defaultValue = '' } = useField(name);
 
-  const handleOnChangeText = useCallback((maskedValue, unmaskedValue) => {
-    setValue(maskedValue);
-    setRawValue(unmaskedValue);
-  }, []);
+  const [value, setValue] = useState(defaultValue);
+  const [rawValue, setRawValue] = useState(defaultValue);
+
+  const mergeOnChaneText = useCallback(
+    (text, rawValeu) => {
+      setValue(text);
+      setRawValue(rawValeu);
+
+      onChangeText && onChangeText(text, rawValeu);
+    },
+    [onChangeText],
+  );
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = value;
+      inputRef.current.rawValue = rawValue;
+    }
+  }, [value, rawValue]);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      getValue: (ref: InputMaskRef) => {
+        return ref.rawValue;
+      },
+      setValue: (_, newValue: string) => {
+        setValue(newValue);
+        setRawValue(newValue);
+      },
+      clearValue: () => {
+        setValue('');
+        setRawValue('');
+      },
+    });
+  }, [fieldName, registerField]);
 
   return (
-    <TextInputMask
-      type={type}
-      includeRawValueInChangeText
-      value={value}
-      onChangeText={handleOnChangeText}
-      customTextInput={Input}
-      customTextInputProps={{
-        rawValue,
-        ...rest,
-      }}
-      {...rest}
-    />
+    <Styled.Container>
+      {icon && <Styled.InputIcon name={icon} size={20} color="#3F4045" />}
+      <Styled.TextInput
+        ref={inputRef}
+        value={value}
+        includeRawValueInChangeText
+        onChangeText={mergeOnChaneText}
+        {...rest}
+      />
+    </Styled.Container>
   );
 };
 
