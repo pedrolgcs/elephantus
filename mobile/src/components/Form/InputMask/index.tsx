@@ -15,8 +15,11 @@ interface InputMaskReference extends TextInputMask {
 }
 
 const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
-  const inputRef = useRef<InputMaskReference>(null);
   const { fieldName, registerField, defaultValue = '', error } = useField(name);
+  const inputValueRef = useRef<InputMaskReference>({
+    rawValue: defaultValue,
+    value: defaultValue,
+  } as InputMaskReference);
 
   const [value, setValue] = useState(defaultValue);
   const [rawValue, setRawValue] = useState(defaultValue);
@@ -27,16 +30,14 @@ const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
   }, []);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.value = value;
-      inputRef.current.rawValue = rawValue;
-    }
+    inputValueRef.current.value = value;
+    inputValueRef.current.rawValue = rawValue;
   }, [value, rawValue]);
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputRef.current,
+      ref: inputValueRef.current,
       getValue: (ref: InputMaskReference) => {
         return ref.rawValue;
       },
@@ -55,7 +56,7 @@ const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
     <Styled.Container>
       {icon && <Styled.InputIcon name={icon} size={20} color="#3F4045" />}
       <Styled.TextInput
-        ref={inputRef}
+        ref={inputValueRef}
         value={value}
         includeRawValueInChangeText
         onChangeText={handleOnChangeText}

@@ -6,8 +6,8 @@ import { FormHandles } from '@unform/core';
 
 // components
 import Backgraound from '../../components/Backgraound';
-import InputMask from '../../components/InputMask';
-import Button from '../../components/Button';
+import InputMask from '../../components/Form/InputMask';
+import Button from '../../components/Form/Button';
 
 // images
 import logoImg from '../../assets/logo.png';
@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
   const snapPoints = useMemo(() => ['0.1%', '25%', '50%', '80%'], []);
 
   const handleSignIn = useCallback(data => {
-    console.log(data, 'deu');
+    console.log(data);
   }, []);
 
   return (
@@ -38,7 +38,12 @@ const SignIn: React.FC = () => {
         <Button onPress={() => formRef.current?.submitForm()}>Entrar</Button>
       </Styled.Container>
 
-      <BottomSheet ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={0}
+        snapPoints={snapPoints}
+        animateOnMount
+      >
         <View
           style={{
             backgroundColor: '#EDF6F9',
