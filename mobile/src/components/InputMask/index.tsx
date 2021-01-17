@@ -5,37 +5,26 @@ import { TextInputMask, TextInputMaskProps } from 'react-native-masked-text';
 // styles
 import * as Styled from './styles';
 
-interface InputMaskRef extends TextInputMask {
-  value: string;
-  rawValue: string;
-}
-
 interface InputMaskProps extends Omit<TextInputMaskProps, 'defaultValue'> {
   name: string;
   icon?: string;
 }
+interface InputMaskReference extends TextInputMask {
+  value: string;
+  rawValue: string;
+}
 
-const InputMask: React.FC<InputMaskProps> = ({
-  name,
-  icon,
-  onChangeText,
-  ...rest
-}) => {
-  const inputRef = useRef<InputMaskRef>(null);
-  const { fieldName, registerField, defaultValue = '' } = useField(name);
+const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
+  const inputRef = useRef<InputMaskReference>(null);
+  const { fieldName, registerField, defaultValue = '', error } = useField(name);
 
   const [value, setValue] = useState(defaultValue);
   const [rawValue, setRawValue] = useState(defaultValue);
 
-  const mergeOnChaneText = useCallback(
-    (text, rawValeu) => {
-      setValue(text);
-      setRawValue(rawValeu);
-
-      onChangeText && onChangeText(text, rawValeu);
-    },
-    [onChangeText],
-  );
+  const handleOnChangeText = useCallback((maskedValue, unmaskedValue) => {
+    setValue(maskedValue);
+    setRawValue(unmaskedValue);
+  }, []);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -48,7 +37,7 @@ const InputMask: React.FC<InputMaskProps> = ({
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      getValue: (ref: InputMaskRef) => {
+      getValue: (ref: InputMaskReference) => {
         return ref.rawValue;
       },
       setValue: (_, newValue: string) => {
@@ -69,7 +58,8 @@ const InputMask: React.FC<InputMaskProps> = ({
         ref={inputRef}
         value={value}
         includeRawValueInChangeText
-        onChangeText={mergeOnChaneText}
+        onChangeText={handleOnChangeText}
+        placeholderTextColor="#b1b1b1"
         {...rest}
       />
     </Styled.Container>

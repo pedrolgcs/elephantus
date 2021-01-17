@@ -7,6 +7,7 @@ import { FormHandles } from '@unform/core';
 // components
 import Backgraound from '../../components/Backgraound';
 import InputMask from '../../components/InputMask';
+import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 // images
