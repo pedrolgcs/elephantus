@@ -1,13 +1,12 @@
 import React, { useRef, useMemo, useCallback } from 'react';
 import { View, Text } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
 // components
 import Backgraound from '../../components/Backgraound';
 import InputMask from '../../components/InputMask';
-import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 // images
@@ -48,7 +47,9 @@ const SignIn: React.FC = () => {
             padding: 30,
           }}
         >
-          <Text>Awesome 🎉</Text>
+          <BottomSheetScrollView>
+            <Text>Awesome 🎉</Text>
+          </BottomSheetScrollView>
         </View>
       </BottomSheet>
     </Backgraound>
