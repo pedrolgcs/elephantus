@@ -4,6 +4,13 @@ import { TextInputMask } from 'react-native-masked-text';
 
 interface ContainerProps {
   isFocused: boolean;
+  isErrored: boolean;
+}
+
+interface InputProps {
+  isErrored: boolean;
+  isFocused: boolean;
+  isFilled: boolean;
 }
 
 export const Container = styled.View<ContainerProps>`
@@ -16,6 +23,13 @@ export const Container = styled.View<ContainerProps>`
 
   border-width: 2px;
   border-color: #f1f8f8;
+
+  ${props =>
+    props.isErrored &&
+    css`
+      border-color: #eda097;
+    `}
+
   ${props =>
     props.isFocused &&
     css`
@@ -33,6 +47,21 @@ export const TextInput = styled(TextInputMask)`
   font-family: 'Nunito-Regular';
 `;
 
-export const InputIcon = styled(Feather)`
+export const InputIcon = styled(Feather)<InputProps>`
   margin-right: 15px;
+
+  color: #b1b1b1;
+
+  ${({ isFilled, isFocused }) =>
+    isFilled || isFocused
+      ? css`
+          color: #6dc9b1;
+        `
+      : null}
+
+  ${props =>
+    props.isErrored &&
+    css`
+      color: #eda097;
+    `}
 `;

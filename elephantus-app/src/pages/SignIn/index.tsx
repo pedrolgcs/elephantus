@@ -1,20 +1,27 @@
 import React, { useRef, useMemo, useCallback } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Form } from '@unform/mobile';
+import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 
 // components
 import Backgraound from '../../components/Background';
 import InputMask from '../../components/Form/InputMask';
-import Input from '../../components/Form/Input';
 import Button from '../../components/Form/Button';
+
+// utils
+import getValidationErros from '../../utils/getValidationsError';
 
 // images
 import logoImg from '../../assets/logo.png';
 
 // styles
 import * as Styled from './styles';
+
+interface SignInFormData {
+  cpf: string;
+}
 
 const SignIn: React.FC = () => {
   // refs
@@ -24,8 +31,30 @@ const SignIn: React.FC = () => {
   // variables
   const snapPoints = useMemo(() => ['0.1%', '25%', '50%', '80%'], []);
 
-  const handleSignIn = useCallback(data => {
-    console.log(data);
+  const handleSignIn = useCallback(async (data: SignInFormData) => {
+    // clean errors
+    formRef.current?.setErrors({});
+
+    try {
+      const schema = Yup.object().shape({
+        cpf: Yup.string().required('Cpf obrigatório').min(11),
+      });
+
+      await schema.validate(data, { abortEarly: false });
+
+      console.log('deu certo');
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErros(err);
+        formRef.current?.setErrors(errors);
+        return;
+      }
+
+      Alert.alert(
+        'Error na autenticação',
+        'Ocorreu um erro ao fazer logon, virique seus dados',
+      );
+    }
   }, []);
 
   return (

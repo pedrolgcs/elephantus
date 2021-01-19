@@ -65,12 +65,14 @@ const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Styled.Container isFocused={isFocused}>
+    <Styled.Container isFocused={isFocused} isErrored={!!error}>
       {icon && (
         <Styled.InputIcon
           name={icon}
           size={20}
-          color={isFocused || isFilled ? '#6dc9b1' : '#3F4045'}
+          isErrored={!!error}
+          isFocused={isFocused}
+          isFilled={isFilled}
         />
       )}
       <Styled.TextInput
