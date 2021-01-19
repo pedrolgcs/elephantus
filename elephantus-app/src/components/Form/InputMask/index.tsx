@@ -16,13 +16,25 @@ interface InputMaskReference extends TextInputMask {
 
 const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
   const { fieldName, registerField, defaultValue = '', error } = useField(name);
+
+  // refs
   const inputValueRef = useRef<InputMaskReference>({
     rawValue: defaultValue,
     value: defaultValue,
   } as InputMaskReference);
 
+  // states
   const [value, setValue] = useState(defaultValue);
   const [rawValue, setRawValue] = useState(defaultValue);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
+  const handleInputFocus = useCallback(() => setIsFocused(true), []);
+
+  const handleInputBlue = useCallback(() => {
+    setIsFocused(false);
+    setIsFilled(!!inputValueRef.current.value);
+  }, []);
 
   const handleOnChangeText = useCallback((maskedValue, unmaskedValue) => {
     setValue(maskedValue);
@@ -53,12 +65,20 @@ const InputMask: React.FC<InputMaskProps> = ({ name, icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Styled.Container>
-      {icon && <Styled.InputIcon name={icon} size={20} color="#3F4045" />}
+    <Styled.Container isFocused={isFocused}>
+      {icon && (
+        <Styled.InputIcon
+          name={icon}
+          size={20}
+          color={isFocused || isFilled ? '#6dc9b1' : '#3F4045'}
+        />
+      )}
       <Styled.TextInput
         ref={inputValueRef}
         value={value}
         includeRawValueInChangeText
+        onBlur={handleInputBlue}
+        onFocus={handleInputFocus}
         onChangeText={handleOnChangeText}
         placeholderTextColor="#b1b1b1"
         {...rest}

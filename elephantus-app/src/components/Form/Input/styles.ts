@@ -1,13 +1,25 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
-export const Container = styled.View`
+interface ContainerProps {
+  isFocused: boolean;
+}
+
+export const Container = styled.View<ContainerProps>`
   width: 100%;
   height: 60px;
   padding: 0 16px;
   background-color: #f1f8f8;
   border-radius: 10px;
   margin-bottom: 10px;
+
+  border-width: 2px;
+  border-color: #f1f8f8;
+  ${props =>
+    props.isFocused &&
+    css`
+      border-color: #ffc09f;
+    `}
 
   flex-direction: row;
   align-items: center;

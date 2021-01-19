@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useCallback } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
@@ -34,7 +34,8 @@ const SignIn: React.FC = () => {
         <Styled.Logo source={logoImg} />
         <Styled.Title>bem vindo</Styled.Title>
         <Form ref={formRef} onSubmit={handleSignIn}>
-          <Input
+          <InputMask
+            type="cpf"
             name="cpf"
             placeholder="CPF"
             icon="tag"
