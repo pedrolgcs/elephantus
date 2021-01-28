@@ -8,6 +8,7 @@ import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import classroomsRouter from '@modules/classrooms/infra/http/routes/classrooms.routes';
 import noticesRouter from '@modules/notices/infra/http/routes/notices.routes';
+import remindersRouter from '@modules/reminders/infra/http/routes/reminders.routes';
 
 // inicialize Router
 const routes = Router();
@@ -48,9 +49,13 @@ routes.use('/profile', profileRouter);
  */
 routes.use('/classrooms', classroomsRouter);
 
-/*
+/* notices
  * [CRUD]
  */
 routes.use('/notices', noticesRouter);
 
+/* reminders
+ * [GET], [POST], [PUT], [DELETE]
+ */
+routes.use('/reminders', remindersRouter);
 export default routes;

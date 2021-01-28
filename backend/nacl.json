@@ -21,6 +21,11 @@
         "resource": "notices/*",
         "methods": "*",
         "action": "allow"
+      },
+      {
+        "resource": "reminders/*",
+        "methods": "*",
+        "action": "allow"
       }
     ]
   }

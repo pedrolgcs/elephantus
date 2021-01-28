@@ -10,7 +10,7 @@ import IRemindersRepository from '@modules/reminders/repositories/IRemindersRepo
 
 interface IRequest {
   title: string;
-  description: string;
+  description?: string;
   day: Days;
   classroom_id: string;
 }
