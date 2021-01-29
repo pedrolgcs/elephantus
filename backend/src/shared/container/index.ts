@@ -26,6 +26,10 @@ import NoticesRepository from '@modules/notices/infra/typeorm/repositories/Notic
 import IRemindersRepository from '@modules/reminders/repositories/IRemindersRepository';
 import RemindersRepository from 'modules/reminders/infra/typeorm/repositories/RemindersRepository';
 
+// responsible Repository
+import IResponsibleRepository from '@modules/responsible/repositories/IResponsibleRepository';
+import ResponsibleRepository from 'modules/responsible/infra/typeorm/repositories/ResponsibleRepository';
+
 container.registerSingleton<IRolesRepository>(
   'RolesRepository',
   RolesRepository,
@@ -49,4 +53,9 @@ container.registerSingleton<INoticesRepository>(
 container.registerSingleton<IRemindersRepository>(
   'RemindersRepository',
   RemindersRepository,
+);
+
+container.registerSingleton<IResponsibleRepository>(
+  'ResponsibleRepository',
+  ResponsibleRepository,
 );
