@@ -21,7 +21,7 @@ responsibleRouter.get(
   '/auth/:cpf',
   celebrate({
     [Segments.PARAMS]: {
-      cpf: Joi.string().uuid().required(),
+      cpf: Joi.string().min(11).required(),
     },
   }),
   responsibleAuthenticatedController.show,
@@ -43,7 +43,7 @@ responsibleRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      cpf: Joi.string().required(),
+      cpf: Joi.string().required().min(11),
       name: Joi.string().required(),
       phone: Joi.string().required(),
       city: Joi.string(),
@@ -78,7 +78,7 @@ responsibleRouter.put(
       responsible_id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      cpf: Joi.string().required(),
+      cpf: Joi.string().required().min(11),
       name: Joi.string().required(),
       phone: Joi.string().required(),
       city: Joi.string(),

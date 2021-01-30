@@ -11,7 +11,7 @@ class Responsible {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   cpf: string;
 
   @Column()
