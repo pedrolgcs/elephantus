@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
+import AppProvider from './src/hooks';
+
 // routes
 import Routes from './src/routes';
 
@@ -23,7 +25,9 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor="#f1f8f8" />
-      <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </NavigationContainer>
   );
 };

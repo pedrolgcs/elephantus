@@ -13,6 +13,9 @@ import Button from '../../components/Form/Button';
 // utils
 import getValidationErros from '../../utils/getValidationsError';
 
+// hooks
+import { useAuth } from '../../hooks/auth';
+
 // images
 import logoImg from '../../assets/logo.png';
 
@@ -28,34 +31,40 @@ const SignIn: React.FC = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const formRef = useRef<FormHandles>(null);
 
+  const { signIn, user } = useAuth();
+
   // variables
   const snapPoints = useMemo(() => ['0.1%', '25%', '50%', '80%'], []);
 
-  const handleSignIn = useCallback(async (data: SignInFormData) => {
-    // clean errors
-    formRef.current?.setErrors({});
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      formRef.current?.setErrors({});
 
-    try {
-      const schema = Yup.object().shape({
-        cpf: Yup.string().required('Cpf obrigatório').min(11),
-      });
+      try {
+        const schema = Yup.object().shape({
+          cpf: Yup.string().required('Cpf obrigatório').length(11),
+        });
 
-      await schema.validate(data, { abortEarly: false });
+        await schema.validate(data, { abortEarly: false });
 
-      console.log('deu certo');
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErros(err);
-        formRef.current?.setErrors(errors);
-        return;
+        await signIn({
+          cpf: data.cpf,
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErros(err);
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        Alert.alert(
+          'Error na autenticação',
+          'Ocorreu um erro ao fazer logon, virique seus dados',
+        );
       }
-
-      Alert.alert(
-        'Error na autenticação',
-        'Ocorreu um erro ao fazer logon, virique seus dados',
-      );
-    }
-  }, []);
+    },
+    [signIn],
+  );
 
   return (
     <Backgraound scrollable>
