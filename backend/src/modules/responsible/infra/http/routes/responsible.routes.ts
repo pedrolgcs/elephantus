@@ -21,7 +21,7 @@ responsibleRouter.get(
   '/auth/:cpf',
   celebrate({
     [Segments.PARAMS]: {
-      cpf: Joi.string().required().length(11),
+      cpf: Joi.string().length(11).required(),
     },
   }),
   responsibleAuthenticatedController.show,
