@@ -3,7 +3,7 @@ import path from 'path';
 import multer, { StorageEngine } from 'multer';
 
 interface IUploadConfig {
-  driver: 'disk';
+  driver: string;
 
   tmpFolder: string;
   uploadsFolder: string;
