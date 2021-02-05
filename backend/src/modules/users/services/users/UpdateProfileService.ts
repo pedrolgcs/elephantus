@@ -49,12 +49,6 @@ class UpdateProfileService {
 
     Object.assign(user, { name, email, phone });
 
-    /*
-      user.name = name;
-      user.email = email;
-      user.phone = phone;
-    */
-
     if (password && !old_password) {
       throw new AppError(
         'You need to inform the old password to set a new password',

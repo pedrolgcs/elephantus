@@ -10,6 +10,7 @@ import classroomsRouter from '@modules/classrooms/infra/http/routes/classrooms.r
 import noticesRouter from '@modules/notices/infra/http/routes/notices.routes';
 import remindersRouter from '@modules/reminders/infra/http/routes/reminders.routes';
 import responsibleRouter from '@modules/responsible/infra/http/routes/responsible.routes';
+import nurseriesRouter from '@modules/nurseries/infra/http/routes/nurseries.routes';
 
 // inicialize Router
 const routes = Router();
@@ -23,6 +24,11 @@ routes.get('/', (request, response) => {
  * [CRUD]
  */
 routes.use('/roles', rolesRouter);
+
+/* nurseries
+ * [CRUD]
+ */
+routes.use('/nurseries', nurseriesRouter);
 
 /* users
  * [CRUD]

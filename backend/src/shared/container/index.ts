@@ -6,6 +6,10 @@ import './providers';
 // users Providers
 import '@modules/users/providers';
 
+// nurseries Repository
+import INurseriesRepository from '@modules/nurseries/repositories/INurseriesRepository';
+import NurseryRepository from '@modules/nurseries/infra/typeorm/repositories/NurseryRepository';
+
 // roles Repository
 import IRolesRepository from '@modules/users/repositories/IRolesRepository';
 import RolesRepository from '@modules/users/infra/typeorm/repositories/RolesRepository';
@@ -33,6 +37,11 @@ import ResponsibleRepository from 'modules/responsible/infra/typeorm/repositorie
 // Notifications
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
+
+container.registerSingleton<INurseriesRepository>(
+  'NurseryRepository',
+  NurseryRepository,
+);
 
 container.registerSingleton<IRolesRepository>(
   'RolesRepository',

@@ -4,7 +4,7 @@ interface IResponsibleDTO extends ICreateResponsibleDTO {
   id: string;
 }
 
-class ReminderBuilder {
+class ResponsibleBuilder {
   private responsibleData: IResponsibleDTO;
 
   constructor(id: string) {
@@ -40,4 +40,4 @@ class ReminderBuilder {
   }
 }
 
-export default ReminderBuilder;
+export default ResponsibleBuilder;
