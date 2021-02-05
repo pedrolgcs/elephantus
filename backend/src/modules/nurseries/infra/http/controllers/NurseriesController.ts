@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 // services
 import ListNurseriesByCityService from '@modules/nurseries/services/ListNurseriesByCityService';
@@ -41,7 +42,7 @@ class NurseriesController {
 
     const nursery = await showNursery.execute({ nursery_id });
 
-    return response.status(200).json(nursery);
+    return response.status(200).json(classToClass(nursery));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

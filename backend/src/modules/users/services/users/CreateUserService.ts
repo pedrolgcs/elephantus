@@ -7,6 +7,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 // repositories
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import INurseriesRepository from '@modules/nurseries/repositories/INurseriesRepository';
 
 // providers
 import IHashUser from '@modules/users/providers/HashUser/models/IHashUser';
@@ -17,6 +18,7 @@ interface IRequest {
   email: string;
   password: string;
   role_id?: string;
+  nursery_id?: string;
 }
 
 @injectable()
@@ -24,6 +26,8 @@ class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('NurseryRepository')
+    private nurseryRepository: INurseriesRepository,
     @inject('HashUser')
     private hashUser: IHashUser,
   ) {}
@@ -34,6 +38,7 @@ class CreateUserService {
     email,
     password,
     role_id,
+    nursery_id,
   }: IRequest): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
@@ -49,6 +54,7 @@ class CreateUserService {
       email,
       password: hashedPassword,
       role_id,
+      nursery_id,
     });
 
     return user;

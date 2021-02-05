@@ -31,7 +31,7 @@ class UsersController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, phone, email, password, role_id } = request.body;
+    const { name, phone, email, password, role_id, nursery_id } = request.body;
 
     const createUser = container.resolve(CreateUserService);
 
@@ -41,6 +41,7 @@ class UsersController {
       email,
       password,
       role_id,
+      nursery_id,
     });
 
     return response.status(201).json(classToClass(user));
@@ -48,7 +49,7 @@ class UsersController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { user_id } = request.params;
-    const { name, phone, email, role_id } = request.body;
+    const { name, phone, email, role_id, nursery_id } = request.body;
 
     const updateUser = container.resolve(UpdateUserService);
 
@@ -58,6 +59,7 @@ class UsersController {
       phone,
       email,
       role_id,
+      nursery_id,
     });
 
     return response.status(201).json(classToClass(user));

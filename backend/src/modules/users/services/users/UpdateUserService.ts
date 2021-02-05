@@ -14,6 +14,7 @@ interface IRequest {
   phone?: string;
   email: string;
   role_id?: string;
+  nursery_id?: string;
 }
 
 @injectable()
@@ -29,6 +30,7 @@ class UpdateUsersService {
     phone,
     email,
     role_id,
+    nursery_id,
   }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
@@ -42,7 +44,13 @@ class UpdateUsersService {
       throw new AppError('E-mail already in use');
     }
 
-    const updatedUser = Object.assign(user, { name, phone, email, role_id });
+    const updatedUser = Object.assign(user, {
+      name,
+      phone,
+      email,
+      role_id,
+      nursery_id,
+    });
 
     return this.usersRepository.save(updatedUser);
   }

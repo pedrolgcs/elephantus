@@ -42,6 +42,7 @@ class NurseryRepository implements INurseriesRepository {
   public async findById(id: string): Promise<Nursery | undefined> {
     const nursery = await this.ormRepository.findOne({
       where: { id },
+      relations: ['users'],
     });
     return nursery;
   }

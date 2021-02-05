@@ -2,9 +2,12 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('nurseries')
 class Nursery {
@@ -16,6 +19,9 @@ class Nursery {
 
   @Column()
   city: string;
+
+  @OneToMany(() => User, user => user.nursery)
+  users: User[];
 
   @CreateDateColumn()
   created_at: Date;

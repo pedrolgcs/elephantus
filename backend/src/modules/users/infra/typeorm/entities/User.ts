@@ -11,6 +11,7 @@ import {
 import { Exclude, Expose } from 'class-transformer';
 
 import Classroom from '@modules/classrooms/infra/typeorm/entities/Classroom';
+import Nursery from '@modules/nurseries/infra/typeorm/entities/Nursery';
 import Role from './Role';
 
 @Entity('users')
@@ -48,6 +49,14 @@ class User {
   @ManyToOne(() => Role, role => role.users, { eager: true })
   @JoinColumn({ name: 'role_id' })
   role: Role;
+
+  @Column({ nullable: true })
+  nursery_id: string;
+
+  // many users belongs to one nursery
+  @ManyToOne(() => Nursery, nursery => nursery.users)
+  @JoinColumn({ name: 'nursery_id' })
+  nursery: Nursery;
 
   // one user have many classes
   @OneToMany(() => Classroom, classroom => classroom.user)

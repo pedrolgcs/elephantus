@@ -27,16 +27,6 @@ userRouter.get(
   usersController.index,
 );
 
-userRouter.get(
-  '/:user_id',
-  celebrate({
-    [Segments.PARAMS]: {
-      user_id: Joi.string().uuid().required(),
-    },
-  }),
-  usersController.show,
-);
-
 userRouter.post(
   '/',
   celebrate({
@@ -46,9 +36,20 @@ userRouter.post(
       email: Joi.string().email().required(),
       password: Joi.string().required(),
       role_id: Joi.string().uuid(),
+      nursery_id: Joi.string().uuid(),
     },
   }),
   usersController.create,
+);
+
+userRouter.get(
+  '/:user_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      user_id: Joi.string().uuid().required(),
+    },
+  }),
+  usersController.show,
 );
 
 userRouter.put(
@@ -62,6 +63,7 @@ userRouter.put(
       phone: Joi.string(),
       email: Joi.string().email().required(),
       role_id: Joi.string().uuid(),
+      nursery_id: Joi.string().uuid(),
     },
   }),
   usersController.update,
