@@ -11,13 +11,17 @@ import DeleteClassroomService from '@modules/classrooms/services/DeleteClassroom
 
 class ClassroomsController {
   public async index(request: Request, response: Response): Promise<Response> {
+    const { nursery } = request.user;
     const { name } = request.query;
 
     const listClassrooms = container.resolve(ListClassroomsService);
 
-    const classrooms = await listClassrooms.execute({ name: name.toString() });
+    const classrooms = await listClassrooms.execute({
+      name: name.toString(),
+      nursery,
+    });
 
-    return response.status(200).json(classrooms);
+    return response.status(200).json(classToClass(classrooms));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {

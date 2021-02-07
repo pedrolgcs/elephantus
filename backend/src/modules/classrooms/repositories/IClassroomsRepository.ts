@@ -13,4 +13,5 @@ export default interface IClassroomsRepository {
     name: string,
     shift: string,
   ): Promise<Classroom | undefined>;
+  findByUser(user_id: string): Promise<Classroom[]>;
 }

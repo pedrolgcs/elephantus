@@ -53,7 +53,7 @@ class AuthenticateUserService {
     // isRole? by default is Auth
     const role = user.role ? user.role.name : 'auth';
 
-    const token = sign({ role }, secret, {
+    const token = sign({ role, nursery: user.nursery_id }, secret, {
       subject: user.id,
       expiresIn,
     });

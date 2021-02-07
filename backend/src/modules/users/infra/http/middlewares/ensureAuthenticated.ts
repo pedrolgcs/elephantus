@@ -8,6 +8,7 @@ import authConfig from '@config/auth';
 
 interface ITokenPayload {
   role: string;
+  nursery: string;
   iat: number;
   exp: number;
   sub: string;
@@ -29,7 +30,7 @@ export default function ensureAuthenticated(
   try {
     const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub, role } = decoded as ITokenPayload;
+    const { sub, role, nursery } = decoded as ITokenPayload;
 
     /* review later */
     // request.decoded = decoded as ITokenPayload;
@@ -37,6 +38,7 @@ export default function ensureAuthenticated(
     request.user = {
       id: sub,
       role,
+      nursery,
     };
 
     return next();

@@ -48,7 +48,9 @@ class ClassroomsRepository implements IClassroomsRepository {
       order: {
         name: 'ASC',
       },
+      relations: ['user'],
     });
+
     return classrooms;
   }
 
@@ -69,6 +71,14 @@ class ClassroomsRepository implements IClassroomsRepository {
       relations: ['user'],
     });
     return classroom;
+  }
+
+  public async findByUser(user_id: string): Promise<Classroom[]> {
+    const classrooms = await this.ormRepository.find({
+      where: { user_id },
+    });
+
+    return classrooms;
   }
 }
 

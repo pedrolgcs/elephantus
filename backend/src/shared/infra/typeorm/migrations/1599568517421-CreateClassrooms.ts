@@ -30,7 +30,7 @@ export default class CreateClassrooms1599568517421
           {
             name: 'user_id',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'created_at',

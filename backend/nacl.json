@@ -10,13 +10,28 @@
     ]
   },
   {
-    "group": "teacher",
+    "group": "director",
     "permissions": [
       {
-        "resource": "classes/*",
-        "methods": ["GET"],
+        "resource": "notices/*",
+        "methods": "*",
         "action": "allow"
       },
+      {
+        "resource": "classrooms/*",
+        "methods": "*",
+        "action": "allow"
+      },
+      {
+        "resource": "classrooms/user/*",
+        "methods": ["GET"],
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "teacher",
+    "permissions": [
       {
         "resource": "notices/*",
         "methods": "*",
@@ -25,6 +40,11 @@
       {
         "resource": "reminders/*",
         "methods": "*",
+        "action": "allow"
+      },
+      {
+        "resource": "classrooms/user/*",
+        "methods": ["GET"],
         "action": "allow"
       }
     ]

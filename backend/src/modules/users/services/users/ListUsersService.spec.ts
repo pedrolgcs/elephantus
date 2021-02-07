@@ -26,14 +26,14 @@ describe('List Users', () => {
       name: 'Peter',
       email: 'pedro@gmail.com',
       password: '123123',
-      role: admin,
+      role_id: admin.id,
     });
 
     const jana = await fakeUsersRepository.create({
       name: 'Jana',
       email: 'jana@gmail.com',
       password: '123123',
-      role: teacher,
+      role_id: teacher.id,
     });
 
     await fakeUsersRepository.create({

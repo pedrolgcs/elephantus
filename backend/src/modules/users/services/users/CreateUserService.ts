@@ -26,8 +26,6 @@ class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-    @inject('NurseryRepository')
-    private nurseryRepository: INurseriesRepository,
     @inject('HashUser')
     private hashUser: IHashUser,
   ) {}

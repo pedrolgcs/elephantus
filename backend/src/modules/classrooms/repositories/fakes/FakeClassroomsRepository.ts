@@ -55,6 +55,14 @@ class FakeClassroomsRepository implements IClassroomsRepository {
     );
     return classroom;
   }
+
+  public async findByUser(user_id: string): Promise<Classroom[]> {
+    const classroom = this.classrooms.filter(
+      element => element.user_id === user_id,
+    );
+
+    return classroom;
+  }
 }
 
 export default FakeClassroomsRepository;
