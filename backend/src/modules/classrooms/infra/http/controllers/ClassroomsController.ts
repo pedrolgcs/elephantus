@@ -77,11 +77,12 @@ class ClassroomsController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
+    const { id: user_id } = request.user;
     const { classroom_id } = request.params;
 
     const deleteClassroom = container.resolve(DeleteClassroomService);
 
-    await deleteClassroom.execute({ classroom_id });
+    await deleteClassroom.execute({ classroom_id, user_id });
 
     return response.status(204).send();
   }
