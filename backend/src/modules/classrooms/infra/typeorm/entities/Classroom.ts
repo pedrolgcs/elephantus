@@ -27,10 +27,18 @@ class Classroom {
   @Column()
   user_id: string;
 
-  // many classes have a one user [teacher]
+  // many classes have a one user [director]
   @ManyToOne(() => User, user => user.classrooms)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @Column()
+  teacher_id: string;
+
+  // many classes have a one user [teacher]
+  @ManyToOne(() => User, user => user.classrooms)
+  @JoinColumn({ name: 'teacher_id' })
+  teacher: User;
 
   // one classroom have a many notices
   @OneToMany(() => Notice, notice => notice.classroom)

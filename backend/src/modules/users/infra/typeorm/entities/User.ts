@@ -59,7 +59,7 @@ class User {
   nursery: Nursery;
 
   // one user have many classes
-  @OneToMany(() => Classroom, classroom => classroom.user)
+  @OneToMany(() => Classroom, classroom => classroom.teacher)
   classrooms: Classroom[];
 
   @CreateDateColumn()

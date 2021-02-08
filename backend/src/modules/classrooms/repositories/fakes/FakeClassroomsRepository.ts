@@ -5,6 +5,7 @@ import Classroom from '@modules/classrooms/infra/typeorm/entities/Classroom';
 
 // dtos
 import ICreateClassroomDTO from '../../dtos/ICreateClassroomDTO';
+import IFiltersClassroomDTO from '../../dtos/IFiltersClassroomDTO';
 
 // repository
 import IClassroomsRepository from '../IClassroomsRepository';
@@ -32,13 +33,17 @@ class FakeClassroomsRepository implements IClassroomsRepository {
     this.classrooms.splice(findIndex, 1);
   }
 
-  public async find(name?: string): Promise<Classroom[]> {
-    const searchName = new RegExp(name, 'i');
-    const findRoles = this.classrooms.filter(user =>
-      searchName.test(user.name),
+  public async find(
+    user_id: string,
+    filters: IFiltersClassroomDTO,
+  ): Promise<Classroom[]> {
+    const searchName = new RegExp(filters.name, 'i');
+    const findClassrooms = this.classrooms.filter(
+      classroom =>
+        searchName.test(classroom.name) && classroom.user_id === user_id,
     );
 
-    return findRoles;
+    return findClassrooms;
   }
 
   public async findById(id: string): Promise<Classroom | undefined> {
@@ -46,19 +51,9 @@ class FakeClassroomsRepository implements IClassroomsRepository {
     return classroom;
   }
 
-  public async findByNameAndShift(
-    name: string,
-    shift: string,
-  ): Promise<Classroom | undefined> {
-    const classroom = this.classrooms.find(
-      element => element.name === name && element.shift === shift,
-    );
-    return classroom;
-  }
-
-  public async findByUser(user_id: string): Promise<Classroom[]> {
+  public async findByTeacher(teacher_id: string): Promise<Classroom[]> {
     const classroom = this.classrooms.filter(
-      element => element.user_id === user_id,
+      element => element.teacher_id === teacher_id,
     );
 
     return classroom;

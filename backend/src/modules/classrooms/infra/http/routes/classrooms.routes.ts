@@ -21,6 +21,7 @@ classroomsRouter.get(
   celebrate({
     [Segments.QUERY]: {
       name: Joi.string().default(''),
+      shift: Joi.string().default(''),
     },
   }),
   classroomsController.index,
@@ -32,7 +33,7 @@ classroomsRouter.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       shift: Joi.string().valid('morning', 'afternoon', 'night').required(),
-      user_id: Joi.string().uuid(),
+      teacher_id: Joi.string().uuid(),
     },
   }),
   classroomsController.create,

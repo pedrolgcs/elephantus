@@ -13,7 +13,7 @@ export default class AddNurseryFieldToUsers1612549276309
       new TableColumn({
         name: 'nursery_id',
         type: 'uuid',
-        isNullable: true,
+        isNullable: false,
       }),
     );
 

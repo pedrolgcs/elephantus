@@ -5,6 +5,7 @@ import IClassroomsRepository from '@modules/classrooms/repositories/IClassroomsR
 
 // dtos
 import ICreateClassroomDTO from '@modules/classrooms/dtos/ICreateClassroomDTO';
+import IFiltersClassroomDTO from '@modules/classrooms/dtos/IFiltersClassroomDTO';
 
 // entities
 import Classroom from '../entities/Classroom';
@@ -30,6 +31,7 @@ class ClassroomsRepository implements IClassroomsRepository {
         name: classroom.name,
         shift: classroom.shift,
         user_id: classroom.user_id,
+        teacher_id: classroom.teacher_id,
       })
       .where('id = :id', { id: classroom.id })
       .execute();
@@ -40,15 +42,20 @@ class ClassroomsRepository implements IClassroomsRepository {
     await this.ormRepository.delete(id);
   }
 
-  public async find(name: string): Promise<Classroom[]> {
+  public async find(
+    user_id: string,
+    { name, shift }: IFiltersClassroomDTO,
+  ): Promise<Classroom[]> {
     const classrooms = await this.ormRepository.find({
       where: {
         name: Raw(field => `${field} ILIKE '%${name}%'`),
+        shift: Raw(field => `${field} ILIKE '%${shift}%'`),
+        user_id,
       },
       order: {
         name: 'ASC',
       },
-      relations: ['user'],
+      relations: ['teacher'],
     });
 
     return classrooms;
@@ -62,20 +69,9 @@ class ClassroomsRepository implements IClassroomsRepository {
     return classroom;
   }
 
-  public async findByNameAndShift(
-    name: string,
-    shift: string,
-  ): Promise<Classroom | undefined> {
-    const classroom = await this.ormRepository.findOne({
-      where: { name, shift },
-      relations: ['user'],
-    });
-    return classroom;
-  }
-
-  public async findByUser(user_id: string): Promise<Classroom[]> {
+  public async findByTeacher(teacher_id: string): Promise<Classroom[]> {
     const classrooms = await this.ormRepository.find({
-      where: { user_id },
+      where: { teacher_id },
     });
 
     return classrooms;

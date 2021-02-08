@@ -12,8 +12,6 @@ import noticesRouter from '@modules/notices/infra/http/routes/notices.routes';
 import remindersRouter from '@modules/reminders/infra/http/routes/reminders.routes';
 import responsibleRouter from '@modules/responsible/infra/http/routes/responsible.routes';
 import nurseriesRouter from '@modules/nurseries/infra/http/routes/nurseries.routes';
-// admin
-import adminClassroomsRouter from '@modules/classrooms/infra/http/routes/adminClassrooms.routes';
 
 // inicialize Router
 const routes = Router();
@@ -79,10 +77,5 @@ routes.use('/reminders', remindersRouter);
  * [GET] /auth for Auth
  */
 routes.use('/responsible', responsibleRouter);
-
-/**
- * Admin Routes
- */
-routes.use('/admin/classrooms', adminClassroomsRouter);
 
 export default routes;

@@ -15,14 +15,14 @@ describe('ListClassrooms', () => {
     listClassrooms = new ListClassroomsService(fakeClassroomsRepository);
   });
 
-  it('should be able to list a classrooms based on name', async () => {
+  it('should be able to list a classrooms based on user', async () => {
     const sala01 = await fakeClassroomsRepository.create({
       name: 'Sala 01',
       shift: 'morning',
       user_id: 'user-id',
     });
 
-    await fakeClassroomsRepository.create({
+    const sala02 = await fakeClassroomsRepository.create({
       name: 'Sala 02',
       shift: 'morning',
       user_id: 'user-id',
@@ -31,11 +31,14 @@ describe('ListClassrooms', () => {
     await fakeClassroomsRepository.create({
       name: 'Sala 03',
       shift: 'morning',
-      user_id: 'user-id',
+      user_id: 'another_user',
     });
 
-    const classrooms = await listClassrooms.execute({ name: 'Sala 01' });
-    expect(classrooms).toEqual(expect.arrayContaining([sala01]));
-    expect(classrooms).toHaveLength(1);
+    const classrooms = await listClassrooms.execute({
+      user_id: 'user-id',
+      filters: {},
+    });
+    expect(classrooms).toEqual(expect.arrayContaining([sala01, sala02]));
+    expect(classrooms).toHaveLength(2);
   });
 });

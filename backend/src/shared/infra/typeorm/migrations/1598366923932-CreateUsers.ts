@@ -44,7 +44,7 @@ export default class CreateUsers1598366923932 implements MigrationInterface {
           {
             name: 'role_id',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'created_at',

@@ -1,7 +1,5 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
-
 // entities
 import Classroom from '@modules/classrooms/infra/typeorm/entities/Classroom';
 
@@ -11,7 +9,8 @@ import IClassroomsRepository from '@modules/classrooms/repositories/IClassroomsR
 interface IRequest {
   name: string;
   shift: 'morning' | 'afternoon' | 'night';
-  user_id?: string;
+  user_id: string;
+  teacher_id?: string;
 }
 
 @injectable()
@@ -21,20 +20,17 @@ class CreateClassroomService {
     private classroomsRepository: IClassroomsRepository,
   ) {}
 
-  public async execute({ name, shift, user_id }: IRequest): Promise<Classroom> {
-    const checkClassroomExists = await this.classroomsRepository.findByNameAndShift(
-      name,
-      shift,
-    );
-
-    if (checkClassroomExists) {
-      throw new AppError('Class name already used in this shift');
-    }
-
+  public async execute({
+    name,
+    shift,
+    user_id,
+    teacher_id,
+  }: IRequest): Promise<Classroom> {
     const classroom = await this.classroomsRepository.create({
       name,
       shift,
       user_id,
+      teacher_id,
     });
 
     return classroom;

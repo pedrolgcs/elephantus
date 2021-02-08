@@ -22,12 +22,14 @@ describe('ListClassroomsByUser', () => {
       name: 'Sala 01',
       shift: 'morning',
       user_id: 'user_id',
+      teacher_id: 'teacher_id',
     });
 
     const sala_02 = await fakeClassroomsRepository.create({
       name: 'Sala 02',
       shift: 'morning',
       user_id: 'user_id',
+      teacher_id: 'teacher_id',
     });
 
     await fakeClassroomsRepository.create({
@@ -37,8 +39,9 @@ describe('ListClassroomsByUser', () => {
     });
 
     const classrooms = await listClassroomsByUser.execute({
-      user_id: 'user_id',
+      teacher_id: 'teacher_id',
     });
+
     expect(classrooms).toEqual(expect.arrayContaining([sala_01, sala_02]));
     expect(classrooms).toHaveLength(2);
   });

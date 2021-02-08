@@ -9,27 +9,41 @@ import ShowClassroomService from '@modules/classrooms/services/ShowClassroomServ
 import UpdateClassroomService from '@modules/classrooms/services/UpdateClassroomService';
 import DeleteClassroomService from '@modules/classrooms/services/DeleteClassroomService';
 
+// dtos
+import IFiltersClassroomDTO from '@modules/classrooms/dtos/IFiltersClassroomDTO';
+
 class ClassroomsController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { nursery } = request.user;
-    const { name } = request.query;
+    const { id: user_id } = request.user;
+    const { name, shift } = request.query;
+
+    const filters = {
+      name,
+      shift,
+    } as IFiltersClassroomDTO;
 
     const listClassrooms = container.resolve(ListClassroomsService);
 
     const classrooms = await listClassrooms.execute({
-      name: name.toString(),
-      nursery,
+      user_id,
+      filters,
     });
 
     return response.status(200).json(classToClass(classrooms));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, shift, user_id } = request.body;
+    const { name, shift, teacher_id } = request.body;
+    const { id: user_id } = request.user;
 
     const createClassroom = container.resolve(CreateClassroomService);
 
-    const classroom = await createClassroom.execute({ name, shift, user_id });
+    const classroom = await createClassroom.execute({
+      name,
+      shift,
+      user_id,
+      teacher_id,
+    });
 
     return response.status(201).json(classroom);
   }
@@ -46,7 +60,8 @@ class ClassroomsController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { classroom_id } = request.params;
-    const { name, shift, user_id } = request.body;
+    const { name, shift, teacher_id } = request.body;
+    const { id: user_id } = request.user;
 
     const updateClassroom = container.resolve(UpdateClassroomService);
 
@@ -55,6 +70,7 @@ class ClassroomsController {
       name,
       shift,
       user_id,
+      teacher_id,
     });
 
     return response.status(201).json(classToClass(classroom));

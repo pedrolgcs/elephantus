@@ -12,7 +12,8 @@ interface IRequest {
   classroom_id: string;
   name: string;
   shift: 'morning' | 'afternoon' | 'night';
-  user_id?: string;
+  user_id: string;
+  teacher_id?: string;
 }
 
 @injectable()
@@ -27,6 +28,7 @@ class UpdateClassroomService {
     name,
     shift,
     user_id,
+    teacher_id,
   }: IRequest): Promise<Classroom> {
     const classroom = await this.classroomsRepository.findById(classroom_id);
 
@@ -34,19 +36,15 @@ class UpdateClassroomService {
       throw new AppError('classroom does not exists', 400);
     }
 
-    const classroomWithSameNameAndShift = await this.classroomsRepository.findByNameAndShift(
-      name,
-      shift,
-    );
-
-    if (
-      classroomWithSameNameAndShift &&
-      classroomWithSameNameAndShift.id !== classroom_id
-    ) {
-      throw new AppError('Classroom name already exists in this shift');
+    if (classroom.user_id !== user_id) {
+      throw new AppError("This classroom doesn't belong to you", 400);
     }
 
-    const updatedClassroom = Object.assign(classroom, { name, shift, user_id });
+    const updatedClassroom = Object.assign(classroom, {
+      name,
+      shift,
+      teacher_id,
+    });
 
     return this.classroomsRepository.save(updatedClassroom);
   }

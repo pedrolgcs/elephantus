@@ -6,9 +6,12 @@ import Classroom from '@modules/classrooms/infra/typeorm/entities/Classroom';
 // repositories
 import IClassroomsRepository from '@modules/classrooms/repositories/IClassroomsRepository';
 
+// dtos
+import IFiltersClassroomDTO from '@modules/classrooms/dtos/IFiltersClassroomDTO';
+
 interface IRequest {
-  name: string;
-  nursery: string;
+  filters: IFiltersClassroomDTO;
+  user_id: string;
 }
 
 @injectable()
@@ -18,15 +21,10 @@ class ListClassroomsService {
     private classroomsRepository: IClassroomsRepository,
   ) {}
 
-  public async execute({ name, nursery }: IRequest): Promise<Classroom[]> {
-    const classrooms = await this.classroomsRepository.find(name);
+  public async execute({ user_id, filters }: IRequest): Promise<Classroom[]> {
+    const classrooms = await this.classroomsRepository.find(user_id, filters);
 
-    // TODO refactor later (now = take all and filter for nursery)
-    const filterClassrooms = classrooms.filter(
-      classroom => classroom.user.nursery_id === nursery,
-    );
-
-    return filterClassrooms;
+    return classrooms;
   }
 }
 

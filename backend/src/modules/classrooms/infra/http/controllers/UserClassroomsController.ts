@@ -11,7 +11,9 @@ class ClassroomsController {
 
     const listClassroomsByUser = container.resolve(ListClassroomsByUserService);
 
-    const classrooms = await listClassroomsByUser.execute({ user_id });
+    const classrooms = await listClassroomsByUser.execute({
+      teacher_id: user_id,
+    });
 
     return response.status(200).json(classToClass(classrooms));
   }
