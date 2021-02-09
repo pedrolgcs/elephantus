@@ -5,6 +5,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 
 // dtos
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
+import IFiltersUserDTO from '@modules/users/dtos/IFiltersUserDTO';
 
 // repository
 import IUsersRepository from '../IUsersRepository';
@@ -45,6 +46,15 @@ class FakeUsersRepository implements IUsersRepository {
   public async findByEmail(email: string): Promise<User> {
     const findUser = this.users.find(user => user.email === email);
     return findUser;
+  }
+
+  public async findByNursery(
+    nursery_id: string,
+    _: IFiltersUserDTO,
+  ): Promise<User[]> {
+    const users = this.users.filter(user => user.nursery_id === nursery_id);
+
+    return users;
   }
 }
 

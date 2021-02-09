@@ -13,6 +13,11 @@
     "group": "director",
     "permissions": [
       {
+        "resource": "users/*",
+        "methods": "*",
+        "action": "allow"
+      },
+      {
         "resource": "notices/*",
         "methods": "*",
         "action": "allow"

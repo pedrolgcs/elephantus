@@ -9,13 +9,22 @@ import ListUsersService from '@modules/users/services/users/ListUsersService';
 import UpdateUserService from '@modules/users/services/users/UpdateUserService';
 import DeleteUserService from '@modules/users/services/users/DeleteUserService';
 
+// dtos
+import IFiltersUserDTO from '@modules/users/dtos/IFiltersUserDTO';
+
 class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { name } = request.query;
+    const { nursery: nursery_id, id: user_id } = request.user;
+
+    const filters = {
+      name,
+      my_self: user_id,
+    } as IFiltersUserDTO;
 
     const listUser = container.resolve(ListUsersService);
 
-    const users = await listUser.execute({ name: name.toString() });
+    const users = await listUser.execute({ nursery_id, filters });
 
     return response.status(200).json(classToClass(users));
   }

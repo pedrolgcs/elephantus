@@ -1,10 +1,11 @@
-import { Repository, getRepository, Raw } from 'typeorm';
+import { Repository, getRepository, Raw, Not } from 'typeorm';
 
 // repository
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
 // dtos
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
+import IFiltersUserDTO from '@modules/users/dtos/IFiltersUserDTO';
 
 // entities
 import User from '../entities/User';
@@ -55,6 +56,7 @@ class UsersRepository implements IUsersRepository {
         name: 'ASC',
       },
     });
+
     return users;
   }
 
@@ -71,6 +73,25 @@ class UsersRepository implements IUsersRepository {
       where: { email },
     });
     return user;
+  }
+
+  public async findByNursery(
+    nursery_id: string,
+    { name, my_self }: IFiltersUserDTO,
+  ): Promise<User[]> {
+    const users = await this.ormRepository.find({
+      where: {
+        name: Raw(field => `${field} ILIKE '%${name}%'`),
+        nursery_id,
+        id: Not(my_self),
+      },
+      relations: ['classrooms'],
+      order: {
+        name: 'ASC',
+      },
+    });
+
+    return users;
   }
 }
 
