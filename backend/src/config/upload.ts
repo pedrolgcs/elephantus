@@ -14,6 +14,9 @@ interface IUploadConfig {
 
   config: {
     disk: Record<string, unknown>;
+    aws: {
+      bucket: string;
+    };
   };
 }
 
@@ -38,5 +41,8 @@ export default {
 
   config: {
     disk: {},
+    aws: {
+      bucket: 'elephanthus-app',
+    },
   },
 } as IUploadConfig;
