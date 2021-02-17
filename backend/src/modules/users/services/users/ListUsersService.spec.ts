@@ -4,6 +4,9 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeRolesRepository from '@modules/users/repositories/fakes/FakeRolesRepository';
 
+// dtos
+import IFiltersUserDTO from '@modules/users/dtos/IFiltersUserDTO';
+
 // service
 import ListUsersService from './ListUsersService';
 
@@ -18,15 +21,16 @@ describe('List Users', () => {
     listUsers = new ListUsersService(fakeUsersRepository);
   });
 
-  it('should be able to list a users based on name', async () => {
+  it('should be able to list a users based on nursery', async () => {
     const admin = await fakeRolesRepository.create({ name: 'admin' });
     const teacher = await fakeRolesRepository.create({ name: 'teacher' });
 
-    await fakeUsersRepository.create({
+    const peter = await fakeUsersRepository.create({
       name: 'Peter',
       email: 'pedro@gmail.com',
       password: '123123',
       role_id: admin.id,
+      nursery_id: 'Acari',
     });
 
     const jana = await fakeUsersRepository.create({
@@ -34,16 +38,25 @@ describe('List Users', () => {
       email: 'jana@gmail.com',
       password: '123123',
       role_id: teacher.id,
+      nursery_id: 'Acari',
     });
 
-    await fakeUsersRepository.create({
+    const joao = await fakeUsersRepository.create({
       name: 'Joao',
       email: 'joao@gmail.com',
       password: '123123',
+      nursery_id: 'Acari',
     });
 
-    const users = await listUsers.execute({ name: 'Jana' });
-    expect(users).toEqual(expect.arrayContaining([jana]));
-    expect(users).toHaveLength(1);
+    const filters = {} as IFiltersUserDTO;
+
+    const users = await listUsers.execute({
+      nursery_id: 'Acari',
+      except_user_id: peter.id,
+      filters,
+    });
+
+    expect(users).toEqual(expect.arrayContaining([jana, joao]));
+    expect(users).toHaveLength(2);
   });
 });

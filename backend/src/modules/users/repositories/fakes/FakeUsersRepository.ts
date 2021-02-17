@@ -50,9 +50,12 @@ class FakeUsersRepository implements IUsersRepository {
 
   public async findByNursery(
     nursery_id: string,
+    except_user_id: string,
     _: IFiltersUserDTO,
   ): Promise<User[]> {
-    const users = this.users.filter(user => user.nursery_id === nursery_id);
+    const users = this.users.filter(user => {
+      return user.nursery_id === nursery_id && user.id !== except_user_id;
+    });
 
     return users;
   }

@@ -77,13 +77,14 @@ class UsersRepository implements IUsersRepository {
 
   public async findByNursery(
     nursery_id: string,
-    { name, my_self }: IFiltersUserDTO,
+    except_user_id: string,
+    { name }: IFiltersUserDTO,
   ): Promise<User[]> {
     const users = await this.ormRepository.find({
       where: {
         name: Raw(field => `${field} ILIKE '%${name}%'`),
         nursery_id,
-        id: Not(my_self),
+        id: Not(except_user_id),
       },
       relations: ['classrooms'],
       order: {

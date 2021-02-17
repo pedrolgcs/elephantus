@@ -11,6 +11,7 @@ import IFiltersUserDTO from '@modules/users/dtos/IFiltersUserDTO';
 
 interface IRequest {
   nursery_id: string;
+  except_user_id: string;
   filters: IFiltersUserDTO;
 }
 
@@ -21,8 +22,16 @@ class ListUsersService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute({ nursery_id, filters }: IRequest): Promise<User[]> {
-    const users = await this.usersRepository.findByNursery(nursery_id, filters);
+  public async execute({
+    nursery_id,
+    except_user_id,
+    filters,
+  }: IRequest): Promise<User[]> {
+    const users = await this.usersRepository.findByNursery(
+      nursery_id,
+      except_user_id,
+      filters,
+    );
     return users;
   }
 }

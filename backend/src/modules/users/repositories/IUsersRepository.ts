@@ -11,5 +11,9 @@ export default interface IUsersRepository {
   find(name?: string): Promise<User[]>;
   findById(id: string): Promise<User | undefined>;
   findByEmail(email: string): Promise<User | undefined>;
-  findByNursery(nursery_id: string, filters: IFiltersUserDTO): Promise<User[]>;
+  findByNursery(
+    nursery_id: string,
+    except_user_id: string,
+    filters: IFiltersUserDTO,
+  ): Promise<User[]>;
 }

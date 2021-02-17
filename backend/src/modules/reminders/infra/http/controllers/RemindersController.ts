@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 // services
-import ListRemindersService from '@modules/reminders/services/ListRemindersService';
+import ListRemindersByClassroomService from '@modules/reminders/services/ListRemindersByClassroomService';
 import CreateReminderService from '@modules/reminders/services/CreateReminderService';
 import UpdateReminderService from '@modules/reminders/services/UpdateReminderService';
 import DeleteReminderService from '@modules/reminders/services/DeleteReminderService';
@@ -11,7 +11,7 @@ class RemindersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { classroom_id } = request.params;
 
-    const listReminders = container.resolve(ListRemindersService);
+    const listReminders = container.resolve(ListRemindersByClassroomService);
 
     const remidners = await listReminders.execute({ classroom_id });
 

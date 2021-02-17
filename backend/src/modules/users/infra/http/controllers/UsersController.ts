@@ -19,12 +19,15 @@ class UsersController {
 
     const filters = {
       name,
-      my_self: user_id,
     } as IFiltersUserDTO;
 
     const listUser = container.resolve(ListUsersService);
 
-    const users = await listUser.execute({ nursery_id, filters });
+    const users = await listUser.execute({
+      nursery_id,
+      except_user_id: user_id,
+      filters,
+    });
 
     return response.status(200).json(classToClass(users));
   }

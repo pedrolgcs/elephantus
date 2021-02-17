@@ -7,6 +7,7 @@ import Reminder, {
 
 // interfaces
 import IRemindersRepository from '@modules/reminders/repositories/IRemindersRepository';
+// import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
   title: string;
@@ -34,6 +35,10 @@ class CreateReminderService {
       day,
       classroom_id,
     });
+
+    /*
+      await this.cacheProvider.invalidatePrefix('reminders-list');
+    */
 
     return reminder;
   }

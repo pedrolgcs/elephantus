@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import FakeRemindersRepository from '@modules/reminders/repositories/fakes/FakeRemindersRepository';
 
 // service
-import ListRemindersService from './ListRemindersService';
+import ListRemindersService from './ListRemindersByClassroomService';
 
 // helpers
 import ReminderBuilder from '../helpers/ReminderBuilder';
@@ -12,7 +12,7 @@ import ReminderBuilder from '../helpers/ReminderBuilder';
 let listReminders: ListRemindersService;
 let fakeRemindersRepository: FakeRemindersRepository;
 
-describe('ListReminders', () => {
+describe('ListRemindersByClassroom', () => {
   beforeEach(() => {
     fakeRemindersRepository = new FakeRemindersRepository();
     listReminders = new ListRemindersService(fakeRemindersRepository);
