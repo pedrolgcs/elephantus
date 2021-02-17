@@ -8,6 +8,7 @@ import cors from 'cors';
 
 import AppError from '@shared/errors/AppError';
 import uploadConfig from '@config/upload';
+import rateLimitir from './middlewares/rateLimiter';
 
 import routes from './routes';
 
@@ -23,6 +24,7 @@ const app = express();
 /* middlewares */
 app.use(json());
 app.use(cors());
+app.use(rateLimitir);
 
 /* routes */
 app.use(routes);
